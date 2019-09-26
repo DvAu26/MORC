@@ -3,10 +3,10 @@ Auto extract french DFIR ORC
 
 ## Prerequis
 
-TODO finish it
 
-* python3-haslib
-* 7zip
+```
+sudo apt install p7zip-full log2timeline python3-magic python3-plaso
+```
 
 ## Roadmap
 
