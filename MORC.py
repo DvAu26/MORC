@@ -9,6 +9,8 @@ import time
 import _thread
 import shutil
 from seeker import Seeker
+from dispatcher import Dispatcher
+
 
 # To be put in config file
 # Base directory
@@ -23,6 +25,7 @@ OUT_DIR = BASE_DIR + "OUTPUT/"
 DIRECTORIES = [BASE_DIR,IN_DIR,WORK_DIR,OUT_DIR]
 
 # Base name for our DFIR-ORCs
+# BASE_NAME = ["ORCSYS","ORCMEM"]
 BASE_NAME = "ORCSYS"
 
 # Check time in the IN_DIR (milliseconds)
@@ -42,13 +45,13 @@ if __name__ == '__main__':
 
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    #dis = Dispatcher(queue_dis,queue_extrac,queue_av,IN_DIR,WORK_DIR,OUT_DIR)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_av,IN_DIR,WORK_DIR,OUT_DIR)
     #ext = Extractor(queue_extrac,IN_DIR,WORK_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
     see.start()
-    #dis.start()
+    dis.start()
     #ext.start()
     #tim.start()
     #avc.start()
@@ -56,7 +59,7 @@ if __name__ == '__main__':
     input()
 
     see.stop()
-    #dis.stop()
+    dis.stop()
     #ext.stop()
     #tim.stop()
     #avc.stop()

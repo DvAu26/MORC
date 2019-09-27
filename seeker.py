@@ -24,8 +24,8 @@ class Seeker:
         _thread.start_new_thread(self.run,())
 
     def stop (self):
-        print("## Stop Seeker ##")
-        self.terminer = True
+        print("## STOP Seeker ##")
+        self.end = True
 
     def run (self):
         while not self.end:
