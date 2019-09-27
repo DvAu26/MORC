@@ -31,6 +31,9 @@ BASE_NAME = "ORCSYS"
 # Check time in the IN_DIR (milliseconds)
 CHECK_TIME = 500
 
+# Block size to calculate HASH 
+BLOCK_SIZE_HASH = 4096
+
 if __name__ == '__main__':
 
     # Directory initiation
@@ -42,16 +45,20 @@ if __name__ == '__main__':
     queue_dis = queue.Queue()
     queue_extrac = queue.Queue()
     queue_av = queue.Queue()
+    queue_hash = queue.Queue()
+    queue_hashed = queue.Queue()
 
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    dis = Dispatcher(queue_dis,queue_extrac,queue_av,IN_DIR,WORK_DIR,OUT_DIR)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_av,queue_hash,queue_hashed,IN_DIR,WORK_DIR,OUT_DIR)
+    has = Hasher(queue_hash,queue_hashed,IN_DIR,WORK_DIR,BLOCK_SIZE_HASH)
     #ext = Extractor(queue_extrac,IN_DIR,WORK_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
     see.start()
     dis.start()
+    has.start()
     #ext.start()
     #tim.start()
     #avc.start()
@@ -60,6 +67,7 @@ if __name__ == '__main__':
 
     see.stop()
     dis.stop()
+    has.stop()
     #ext.stop()
     #tim.stop()
     #avc.stop()

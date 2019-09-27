@@ -12,15 +12,17 @@ import shutil
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_av,i_dir,w_dir,o_dir):
+    def __init__ (self,q_dis,q_extrac,q_av,q_hsh,q_hsd,i_dir,w_dir,o_dir):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_av = q_av
+        self.q_hash = q_hsh
+        self.q_hashed = q_hsd
         self.in_dir = i_dir
         self.wk_dir = w_dir
         self.ou_dir = o_dir
         self.end = False
-        print("== INIT dispatcher ==")
+        print("== INIT Dispatcher ==")
 
     def start (self):
         _thread.start_new_thread(self.run,())
@@ -37,6 +39,8 @@ class Dispatcher:
 
     def run2 (self,f):
         print("Dispatcher on : " + f)
+        # create f+".working" to not take twice
+        # it look like a DFIR-ORC?
         # Calculate MD5?
         # Check MD5?
         # Check Extract?
