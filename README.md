@@ -8,6 +8,11 @@ Auto extract french DFIR ORC
 sudo apt install p7zip-full log2timeline python3-magic python3-plaso
 ```
 
+```
+python hashlib
+```
+
+
 ## Roadmap
 
 Little roadmap :
