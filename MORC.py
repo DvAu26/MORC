@@ -8,7 +8,7 @@ import queue
 import time
 import _thread
 import shutil
-from .seeker import Seeker
+from seeker import Seeker
 
 # To be put in config file
 # Base directory
@@ -41,11 +41,11 @@ if __name__ == '__main__':
     queue_av = queue.Queue()
 
 
-    see = seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    #dis = dispatcher(queue_dis,queue_extrac,queue_av,IN_DIR,WORK_DIR,OUT_DIR)
-    #ext = extractor(queue_extrac,IN_DIR,WORK_DIR)
-    #tim = timeliner(queue_extrac,WORK_DIR,OUT_DIR)
-    #avc = avcheck(queue_av,WORK_DIR,OUT_DIR)
+    see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
+    #dis = Dispatcher(queue_dis,queue_extrac,queue_av,IN_DIR,WORK_DIR,OUT_DIR)
+    #ext = Extractor(queue_extrac,IN_DIR,WORK_DIR)
+    #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
+    #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
     see.start()
     #dis.start()

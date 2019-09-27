@@ -12,23 +12,23 @@ import shutil
 
 class Seeker:
 
-    def __init__(self,q_dis,i_dir,b_name,ch_time):
-        self.q_dis = queue_dis
+    def __init__ (self,q_dis,i_dir,b_name,ch_time):
+        self.q_dis = q_dis
         self.in_dir = i_dir
-        self.b_name = BASE_NAME
+        self.b_name = b_name
         self.check_time = ch_time
         self.end = False
         print("== INIT Seeker ==")
 
-    def start():
+    def start (self):
         _thread.start_new_thread(self.run,())
 
-    def stop():
+    def stop (self):
         print("## Stop Seeker ##")
         self.terminer = True
 
-    def run():
-        while not self.terminer:
+    def run (self):
+        while not self.end:
             fichiers = os.listdir(self.in_dir)
             test = False
             for f in fichiers:
@@ -42,14 +42,14 @@ class Seeker:
                     print("Seeker : " + f)
                 else:
                     print("-- No new DFIR-ORCs --")
-            time.sleep(CHECK_TIME)
+            time.sleep(self.check_time)
 
 
-    def verif_arch(self,mag_f,fic):
+    def verif_arch (self,mag_f,fic):
         test = False
         if mag_f.find("archive") >=0 and fic.find(self.b_name) >= 0:
             test = True
         return test
 
-   def verif_working(self,fic):
-       return os.path.isfile(self.in_dir+fic+".working")
+    def verif_working (self,fic):
+        return os.path.isfile(self.in_dir+fic+".working")
