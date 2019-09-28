@@ -39,7 +39,10 @@ class Hasher:
     def run2 (self,f):
         print("Hasher on : " + f)
         if not self.check_md5_file(f) :
-            self.calc_md5(f)
+            md5_file = self.calc_md5(f)
+            with open(self.in_dir+f+".md5","w") as mdfile:
+                mdfile.write(md5_file + " " + f)
+                mdfile.close()
         test = self.check_md5_cf(f)
             
         # f.md5 exist ?
@@ -53,9 +56,10 @@ class Hasher:
                 f_line = hfile.readline()
                 f_other = hfile.read()
                 hfile.close()
-            print(f_line.split()[0])
-            print(f_line.split()[1])
-            return True
+            if len(f_line.split()[0]) == 32 and f_line.split()[1] == f:
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -67,9 +71,10 @@ class Hasher:
             if len(byt_block) > 0:
                 calculating_md5.update(byt_block)
         md5_file = calculating_md5.hexdigest()
-        print(md5_file)
         return md5_file
 
     def check_md5_cf (self,f):
         # method to check the calculate md5 and the md5 in the .md5 file
-        print("check MD5")
+        print("check MD5 : " + f + " |-| " + f + ".md5")
+        if self.calc_md5(f) == 
+        

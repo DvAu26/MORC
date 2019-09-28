@@ -40,8 +40,7 @@ class Seeker:
                     fw = open(self.in_dir+f+".working","w")
                     fw.close()
                     print("Seeker : " + f)
-                else:
-                    print("-- No new DFIR-ORCs --")
+            print("-- Sleeping for " + str(self.check_time) + "s --")
             time.sleep(self.check_time)
 
 
