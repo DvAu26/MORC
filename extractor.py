@@ -49,14 +49,13 @@ class Extractor:
             self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
 
     def extrac_file (self,f):
-        p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/"], stdout=subprocess.PIPE, universal_newlines=True)
-            for line in p.stdout:
-                print(line)
-                if line.find("Everythingis OK") >=0:
-                    print("OK")
-                else:
-                    print("NOK")
-        return True
+        p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        for line in p.stdout:
+            if str(line).find("Everything is Ok") >= 0:
+                return True
+            else:
+                continue
+        return False
 
     def md5_recup (self,f):
         with open(self.in_dir+f+".md5") as hfile:
