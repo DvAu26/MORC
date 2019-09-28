@@ -38,30 +38,38 @@ class Hasher:
 
     def run2 (self,f):
         print("Hasher on : " + f)
+        if not self.check_md5_file(f) :
+            self.calc_md5(f)
+        test = self.check_md5_cf(f)
+            
         # f.md5 exist ?
         # md5(f) == f.md5 ?
-        # q_hashed.put(f)
+        # --> q_hashed.put(f)
 
     def check_md5_file (self,f):
         # method to check if f.md5 exist with something like MD5
-        if os.path.isfile(self.i_dir+f+".md5"):
-            with open(self.i_dir+f+".md5") as hfile:
+        if os.path.isfile(self.in_dir+f+".md5"):
+            with open(self.in_dir+f+".md5") as hfile:
                 f_line = hfile.readline()
                 f_other = hfile.read()
                 hfile.close()
             print(f_line.split()[0])
             print(f_line.split()[1])
+            return True
+        else:
+            return False
 
     def calc_md5 (self,f):
         # method to calculate md5(f)
         calculating_md5 = hashlib.md5()
-        with open(self.i_dir+f,"rb") as ficrb:
-            for byt_block in iter(lambda f.read(self.b_size),b""):
-                 calculating_md5.update(byt_block)
+        with open(self.in_dir+f,"rb") as ficrb:
+            byt_block = ficrb.read(self.bk_size)
+            if len(byt_block) > 0:
+                calculating_md5.update(byt_block)
         md5_file = calculating_md5.hexdigest()
+        print(md5_file)
         return md5_file
 
     def check_md5_cf (self,f):
         # method to check the calculate md5 and the md5 in the .md5 file
-        
-
+        print("check MD5")

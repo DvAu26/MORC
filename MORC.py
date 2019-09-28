@@ -10,6 +10,7 @@ import _thread
 import shutil
 from seeker import Seeker
 from dispatcher import Dispatcher
+from hasher import Hasher
 
 
 # To be put in config file

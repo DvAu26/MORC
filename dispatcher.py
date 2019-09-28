@@ -39,8 +39,8 @@ class Dispatcher:
 
     def run2 (self,f):
         print("Dispatcher on : " + f)
-        # create f+".working" to not take twice
-        # it look like a DFIR-ORC?
+        self.q_hash.put(f)
+
         # Calculate MD5?
         # Check MD5?
         # Check Extract?
