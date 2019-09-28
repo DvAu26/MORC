@@ -11,7 +11,7 @@ import shutil
 from seeker import Seeker
 from dispatcher import Dispatcher
 from hasher import Hasher
-
+from extractor import Extractor
 
 # To be put in config file
 # Base directory
@@ -45,22 +45,23 @@ if __name__ == '__main__':
     # Queues initiation
     queue_dis = queue.Queue()
     queue_extrac = queue.Queue()
+    queue_extraced = queue.Queue()
     queue_av = queue.Queue()
     queue_hash = queue.Queue()
     queue_hashed = queue.Queue()
 
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    dis = Dispatcher(queue_dis,queue_extrac,queue_av,queue_hash,queue_hashed,IN_DIR,WORK_DIR,OUT_DIR)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_av,queue_hash,queue_hashed,IN_DIR,WORK_DIR,OUT_DIR)
     has = Hasher(queue_hash,queue_hashed,IN_DIR,WORK_DIR,BLOCK_SIZE_HASH)
-    #ext = Extractor(queue_extrac,IN_DIR,WORK_DIR)
+    ext = Extractor(queue_extrac,queue_extraced,IN_DIR,WORK_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
     see.start()
     dis.start()
     has.start()
-    #ext.start()
+    ext.start()
     #tim.start()
     #avc.start()
 
@@ -69,6 +70,6 @@ if __name__ == '__main__':
     see.stop()
     dis.stop()
     has.stop()
-    #ext.stop()
+    ext.stop()
     #tim.stop()
     #avc.stop()
