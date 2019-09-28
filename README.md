@@ -1,7 +1,7 @@
 # MORC
 Auto extract french DFIR ORC
 
-## Prerequis
+## Requirements
 
 
 ```
