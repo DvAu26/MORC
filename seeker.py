@@ -45,6 +45,9 @@ class Seeker:
 
 
     def verif_arch (self,mag_f,fic):
+        # Method to check if the magic is like an archive
+        # True if it is
+        # False if not
         test = False
         if mag_f.find("archive") >=0:
             for bname in self.b_name:
@@ -53,4 +56,7 @@ class Seeker:
         return test
 
     def verif_working (self,fic):
+        # Method to check if the f.working file exist
+        # True if it is
+        # False if not
         return os.path.isfile(self.in_dir+fic+".working")

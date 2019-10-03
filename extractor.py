@@ -33,6 +33,7 @@ class Extractor:
                 _thread.start_new_thread(self.run2,(fic_ext,))
 
     def run2 (self,f):
+        # f is file name in the IN_DIR
         # check if wk_dir/MD5/ exists
         # if MD5 exist q_extrad(f)
         # if not extract in the wk_dir/MD5 folder
@@ -50,6 +51,8 @@ class Extractor:
             self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
 
     def extrac_file (self,f):
+        # Method to extract file f from the IN_DIR in the WORK_DIR
+        # with the MD5(f) as extracting directory
         p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
             if str(line).find("Everything is Ok") >= 0:
@@ -59,6 +62,8 @@ class Extractor:
         return False
 
     def md5_recup (self,f):
+        # Method to not calculate but extract from the
+        # f.md5 in the IN_DIR
         with open(self.in_dir+f+".md5") as hfile:
             f_line = hfile.readline()
             f_other = hfile.read()

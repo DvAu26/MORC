@@ -54,6 +54,8 @@ class Hasher:
 
     def check_md5_file (self,f):
         # method to check if f.md5 exist with something like MD5
+        # True if len = 32 and f in the first line
+        # False if not
         if os.path.isfile(self.in_dir+f+".md5"):
             with open(self.in_dir+f+".md5") as hfile:
                 f_line = hfile.readline()
@@ -68,6 +70,7 @@ class Hasher:
 
     def calc_md5 (self,f):
         # method to calculate md5(f)
+        # return the calculate MD5
         calculating_md5 = hashlib.md5()
         with open(self.in_dir+f,"rb") as ficrb:
             byt_block = ficrb.read(self.bk_size)
@@ -79,6 +82,8 @@ class Hasher:
     def check_md5_cf (self,f,md5_c):
         # method to check the calculate md5 and the md5 in the .md5 file
         # md5_c -> calculate md5
+        # True if calculate MD5 = md5 in the f.md5 file
+        # False if not
         with open(self.in_dir+f+".md5") as hfile:
                 f_line = hfile.readline()
                 f_other = hfile.read()

@@ -46,20 +46,21 @@ class Dispatcher:
 
 
     def run2 (self,f):
+        # seeker send a file to be hashed
         print("Dispatcher on : " + f)
         self.q_hash.put(f)
 
     def run3 (self,f):
+        # hasher send a file to be extracted
+        # MD5 calculated and f.md5 generated at least
         print("Dispatch after hash on : " + f)
         self.q_extrac.put(f)
 
     def run4 (self,d):
+        # extractor send the extracting directory to be exploited
+        # MD5 calculated and f.md5 generated at least
+        # 1st extract done in WORK_DIR/MD5(f)
         print("Dispatch after extract on : " + d)
-        # self.q_extrac.put(f)
-        # Calculate MD5?
-        # Check MD5?
-        # Check Extract?
-        # Extract
         # Check AV?
         # Create AV arch
         # Check CSV?
