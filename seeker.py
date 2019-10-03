@@ -46,8 +46,10 @@ class Seeker:
 
     def verif_arch (self,mag_f,fic):
         test = False
-        if mag_f.find("archive") >=0 and fic.find(self.b_name) >= 0:
-            test = True
+        if mag_f.find("archive") >=0:
+            for bname in self.b_name:
+                if fic.find(bname) >=0 :
+                    test = True
         return test
 
     def verif_working (self,fic):

@@ -27,7 +27,7 @@ DIRECTORIES = [BASE_DIR,IN_DIR,WORK_DIR,OUT_DIR]
 
 # Base name for our DFIR-ORCs
 # BASE_NAME = ["ORCSYS","ORCMEM"]
-BASE_NAME = "ORCSYS"
+BASE_NAME = ["ORCSYS","DFIR-ORC"]
 
 # Check time in the IN_DIR (milliseconds)
 CHECK_TIME = 500

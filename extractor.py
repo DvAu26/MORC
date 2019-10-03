@@ -46,6 +46,7 @@ class Extractor:
                 os.remove(self.in_dir+f+".working")
         else:
             print("=== MD5 dir exist ===")
+            print(f)
             self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
 
     def extrac_file (self,f):

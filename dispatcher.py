@@ -42,7 +42,7 @@ class Dispatcher:
                 _thread.start_new_thread(self.run3,(fic_hsd,))
             if self.q_hashed.qsize() > 0:
                 dir_ext = self.q_extrad.get()
-                _thread.start_new_thread(self.run3,(dir_ext,))
+                _thread.start_new_thread(self.run4,(dir_ext,))
 
 
     def run2 (self,f):
