@@ -11,9 +11,10 @@ import shutil
 
 class Extractor:
 
-    def __init__ (self,q_ext,q_exted,i_dir,w_dir):
+    def __init__ (self,q_ext,q_exted,q_extp,i_dir,w_dir):
         self.q_ext = q_ext
         self.q_extd = q_exted
+        self.q_ext2 = q_extp
         self.in_dir = i_dir
         self.wk_dir = w_dir
         self.end = False
@@ -31,6 +32,9 @@ class Extractor:
             if self.q_ext.qsize() > 0:
                 fic_ext = self.q_ext.get()
                 _thread.start_new_thread(self.run2,(fic_ext,))
+            if self.q_ext2.qsize() > 0:
+                path_ext = self.q_ext2.get()
+                _thread.start_new_thread(self.run3,(path_ext,))
 
     def run2 (self,f):
         # f is file name in the IN_DIR
@@ -49,6 +53,21 @@ class Extractor:
             print("=== MD5 dir exist ===")
             print(f)
             self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
+
+    def run3 (self,path):
+        # path is a path from an extracted archives
+        # just extract in the same directory but whit
+        # ".dir" like directory
+        if not os.path.isdir(path+".dir"):
+            print("Extracting file : " + path)
+            if self.extrac_path(path):
+                print("=== Extract OK ===")
+                self.q_extd.put(path+".dir")
+            else:
+                print("**** Error extracting file : " + path + "****")
+        else:
+            print("=== Directory exist ===")
+            self.q_extd.put(path+".dir")
 
     def extrac_file (self,f):
         # Method to extract file f from the IN_DIR in the WORK_DIR
@@ -69,3 +88,14 @@ class Extractor:
             f_other = hfile.read()
             hfile.close()
         return str(f_line.split()[0]).upper()
+
+    def extrac_path (self,pth):
+        # Method to extract file f from the IN_DIR in the WORK_DIR
+        # with the MD5(f) as extracting directory
+        p = subprocess.Popen(["7z","x",pth,"-o"+pth+".dir/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        for line in p.stdout:
+            if str(line).find("Everything is Ok") >= 0:
+                return True
+            else:
+                continue
+        return False

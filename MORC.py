@@ -29,6 +29,9 @@ DIRECTORIES = [BASE_DIR,IN_DIR,WORK_DIR,OUT_DIR]
 # BASE_NAME = ["ORCSYS","ORCMEM"]
 BASE_NAME = ["ORCSYS","DFIR-ORC","ORCYARA","ORCMEM"]
 
+# DIR OUTPUT arbo
+DIR_OUT = ["AV_CHECK","CSV_Splunk","TIMELINE"]
+
 # Check time in the IN_DIR (milliseconds)
 CHECK_TIME = 500
 
@@ -49,12 +52,12 @@ if __name__ == '__main__':
     queue_av = queue.Queue()
     queue_hash = queue.Queue()
     queue_hashed = queue.Queue()
-
+    queue_ext_path = queue.Queue()
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_av,queue_hash,queue_hashed,IN_DIR,WORK_DIR,OUT_DIR)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_av,queue_hash,queue_hashed,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
     has = Hasher(queue_hash,queue_hashed,IN_DIR,WORK_DIR,BLOCK_SIZE_HASH)
-    ext = Extractor(queue_extrac,queue_extraced,IN_DIR,WORK_DIR)
+    ext = Extractor(queue_extrac,queue_extraced,queue_ext_path,IN_DIR,WORK_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
