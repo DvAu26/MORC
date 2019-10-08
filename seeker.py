@@ -49,9 +49,9 @@ class Seeker:
         # True if it is
         # False if not
         test = False
-        if mag_f.find("archive") >=0:
+        if mag_f.find("archive") >= 0:
             for bname in self.b_name:
-                if fic.find(bname) >=0 :
+                if fic.find(bname) >= 0 :
                     test = True
         return test
 
