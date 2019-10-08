@@ -85,7 +85,7 @@ class Dispatcher:
                 # print("name --> " + name + "\n" + root + "\n" + str(dirs))
                 # print("########## : " + os.path.join(root,name))
                 # print("magic --> : " + magic.from_file(os.path.join(root,name)))
-                if name.find(".7z") and magic.from_file(os.path.join(root,name)).find("archive") >= 0:
+                if name.find(".7z") >=0 and magic.from_file(os.path.join(root,name)).find("archive") >= 0:
                     # print("=== Extracted path : " + root + name)
                     self.q_extrap.put(os.path.join(root,name))
                 else:
