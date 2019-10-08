@@ -5,11 +5,15 @@ Auto extract french DFIR ORC
 
 
 ```
-sudo apt install p7zip-full log2timeline python3-magic python3-plaso
+sudo apt install p7zip-full log2timeline python3-magic python3-plaso python3-pip
 ```
 
 ```
 python hashlib
+```
+
+```
+sudo pip3 pyunpack patool
 ```
 
 
