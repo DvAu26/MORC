@@ -13,7 +13,7 @@ import random
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_dir,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_dir,i_csv,o_csv,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
@@ -21,6 +21,8 @@ class Dispatcher:
         self.q_av = q_av
         self.q_hash = q_hsh
         self.q_hashed = q_hsd
+        self.q_csv = i_csv
+        self.q_csved = o_csv
         self.in_dir = i_dir
         self.wk_dir = w_dir
         self.ou_dir = o_dir
@@ -96,8 +98,8 @@ class Dispatcher:
                             shutil.copy2(os.path.join(root,name),self.ou_dir+md5p+"/LOGS/",follow_symlinks=False)
                     else:
                         if name.find(".csv") >= 0:
-                            print("=== CSVer file : " + root + name + " ===")
-                            # self.q_csver.put(root+name)
+                            print("=== CSVer file : " + os.path.join(root,name) + " ===")
+                            self.q_csv.put(os.path.join(root,name))
                         else:
                             print("=== File : " + os.path.join(root,name) + " ===")
         # Check AV?

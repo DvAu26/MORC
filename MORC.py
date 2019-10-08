@@ -12,6 +12,7 @@ from seeker import Seeker
 from dispatcher import Dispatcher
 from hasher import Hasher
 from extractor import Extractor
+from csver import Csver
 
 # To be put in config file
 # Base directory
@@ -53,11 +54,14 @@ if __name__ == '__main__':
     queue_hash = queue.Queue()
     queue_hashed = queue.Queue()
     queue_ext_path = queue.Queue()
+    queue_csv = queue.Queue()
+    queue_csved = queue.Queue()
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_ext_path,queue_av,queue_hash,queue_hashed,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_ext_path,queue_av,queue_hash,queue_hashed,queue_csv,queue_csved,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
     has = Hasher(queue_hash,queue_hashed,IN_DIR,WORK_DIR,BLOCK_SIZE_HASH)
     ext = Extractor(queue_extrac,queue_extraced,queue_ext_path,IN_DIR,WORK_DIR)
+    csv = Csver(queue_csv,queue_csved,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
@@ -65,6 +69,7 @@ if __name__ == '__main__':
     dis.start()
     has.start()
     ext.start()
+    csv.start()
     #tim.start()
     #avc.start()
 
@@ -74,5 +79,6 @@ if __name__ == '__main__':
     dis.stop()
     has.stop()
     ext.stop()
+    csv.stop()
     #tim.stop()
     #avc.stop()
