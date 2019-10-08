@@ -93,7 +93,8 @@ class Extractor:
     def extrac_path (self,pth):
         # Method to extract file f from the IN_DIR in the WORK_DIR
         # with the MD5(f) as extracting directory
-        p = subprocess.Popen(["7z","x",pth,"-o"+pth+".dir/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        p = Archive(pth).extractall(+pth+".dir/")
+        #p = subprocess.Popen(["7z","x",pth,"-o"+pth+".dir/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
             if str(line).find("Everything is Ok") >= 0:
                 return True
