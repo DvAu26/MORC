@@ -8,14 +8,16 @@ import queue
 import time
 import _thread
 import shutil
+import random
 
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_av,q_hsh,q_hsd,i_dir,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_dir,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
+        self.q_extrap = q_extp
         self.q_av = q_av
         self.q_hash = q_hsh
         self.q_hashed = q_hsd
@@ -57,13 +59,14 @@ class Dispatcher:
         print("Dispatch after hash on : " + f)
         self.q_extrac.put(f)
         # make the directory OUTPUT
-        md5f = self.md5_recup(f)
+        md5f = self.md5_recup_from_f(f)
         if not os.path.isdir(self.ou_dir+md5f):
             print("=== Directory OUTPUT ... ===")
             os.mkdir(self.ou_dir+md5f)
-            os.mkdir(self.ou_dir+md5f+"/"+f+".dir")
+            fo = open(self.ou_dir+md5f+"/"+f+".orginalName","w")
+            fo.close()
             for d in self.dir_ou:
-                os.mkdir(self.ou_dir+md5f+"/"+f+".dir/"+d)
+                os.mkdir(self.ou_dir+md5f+"/"+d)
         else:
             print("=== Directory OUTPUT exist ===")
 
@@ -72,6 +75,31 @@ class Dispatcher:
         # MD5 calculated and f.md5 generated at least
         # 1st extract done in WORK_DIR/MD5(f)
         print("Dispatch after extract on : " + d)
+        # TODO check not return an empty str
+        md5p = self.md5_recup_from_p(d)
+        # print(md5p)
+        for root, dirs, files in os.walk(d):
+            for name in files:
+                # print("name --> " + name + "\n" + root + "\n" + str(dirs))
+                # print("########## : " + os.path.join(root,name))
+                # print("magic --> : " + magic.from_file(os.path.join(root,name)))
+                if name.find(".7z") and magic.from_file(os.path.join(root,name)).find("archive") >= 0:
+                    # print("=== Extracted path : " + root + name)
+                    self.q_extrap.put(os.path.join(root,name))
+                else:
+                    if name.find(".log") >= 0:
+                        print("=== Copy log file " + name + " in OUTPUT/MD5/Filename.dir/LOGS ===")
+                        if os.path.isfile(self.ou_dir+md5p+"/LOGS/"+name):
+                            namec = name.split(".")[0] + "_" + str(random.randint(1000,9999)) + ".log"
+                            shutil.copy2(os.path.join(root,name),self.ou_dir+md5p+"/LOGS/"+namec,follow_symlinks=False)
+                        else:
+                            shutil.copy2(os.path.join(root,name),self.ou_dir+md5p+"/LOGS/",follow_symlinks=False)
+                    else:
+                        if name.find(".csv") >= 0:
+                            print("=== CSVer file : " + root + name + " ===")
+                            # self.q_csver.put(root+name)
+                        else:
+                            print("=== File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
         # Check CSV?
@@ -79,7 +107,7 @@ class Dispatcher:
         # Check timeline
         # Create timeline
 
-    def md5_recup (self,f):
+    def md5_recup_from_f (self,f):
         # Method to not calculate but extract from the
         # f.md5 in the IN_DIR
         with open(self.in_dir+f+".md5") as hfile:
@@ -87,3 +115,12 @@ class Dispatcher:
             f_other = hfile.read()
             hfile.close()
         return str(f_line.split()[0]).upper()
+
+    def md5_recup_from_p (self,p):
+        # Method to not calculate but extract from the
+        # workspace path
+        tpath = p.split("/")
+        for d in tpath:
+            if len(d) == 32:
+                return d
+        return ""
