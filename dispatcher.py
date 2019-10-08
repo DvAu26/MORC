@@ -13,7 +13,7 @@ import random
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_dir,i_csv,o_csv,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_dir,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
@@ -62,7 +62,7 @@ class Dispatcher:
         self.q_extrac.put(f)
         # make the directory OUTPUT
         md5f = self.md5_recup_from_f(f)
-        if not os.path.isdir(self.ou_dir+md5f):
+        if not os.path.isdir(self.ou_dir+md5f+"/LOGS/"):
             print("=== Directory OUTPUT ... ===")
             os.mkdir(self.ou_dir+md5f)
             fo = open(self.ou_dir+md5f+"/"+f+".orginalName","w")
