@@ -8,7 +8,7 @@ import queue
 import time
 import _thread
 import shutil
-
+from pyunpack import Archive
 class Extractor:
 
     def __init__ (self,q_ext,q_exted,i_dir,w_dir):
@@ -53,7 +53,8 @@ class Extractor:
     def extrac_file (self,f):
         # Method to extract file f from the IN_DIR in the WORK_DIR
         # with the MD5(f) as extracting directory
-        p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        p = Archive(self.in_dir+f).extractall(self.wk_dir+self.md5_recup(f)+"/")
+        #p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
             if str(line).find("Everything is Ok") >= 0:
                 return True
