@@ -101,6 +101,9 @@ class Dispatcher:
                             print("=== CSVer file : " + os.path.join(root,name) + " ===")
                             self.q_csv.put(os.path.join(root,name))
                         else:
+                            # ------
+                            # Here to put an queue_regin.put(...) with check magic.
+                            # ------
                             print("=== File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
