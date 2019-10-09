@@ -35,6 +35,25 @@ class Csver:
 
     def run2 (self,pf):
         # Works with file path
+        # Getthis, process, jobstatistics... -> DFIR-ORC Info
+        # Others                             -> DFIR-ORC Artefacts
         # Test if ComputerName is present
         # Add columns MD5DFIR, NameDFIR, ComputerName if not present
         print("CSVer on : " + pf)
+
+    def check_csv (self,pf):
+        # Method to check, 1st line like an CSV header
+        # If not find it and put it at the header place
+        print("Check csv : " + pf)
+
+    def add_columns (self,pf):
+        # Method to add columns in the header and
+        # in the csv with MD5DFIR, NameDFIR, ComputerName
+        print("Add Columns csv : " + pf)
+
+    def clean_header (self,pf):
+        # Method to clen the header 
+        # No space replace by _ not host name or other just ComputerName
+        # That's not to have different fields for the same information
+        print("Add Columns csv : " + pf)
+
