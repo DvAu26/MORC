@@ -14,6 +14,10 @@ from hasher import Hasher
 from extractor import Extractor
 from csver import Csver
 
+# TODO
+# Incident response identification... IRXXX or other.
+# Find a way with parameters or with a folder name
+
 # To be put in config file
 # Base directory
 BASE_DIR = "/mnt/MORC/"
