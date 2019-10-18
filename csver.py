@@ -82,17 +82,16 @@ class Csver:
                 headeroutcsv += "," + ",".join(self.clean_header(headerinpcsv))
                 outcsv.write(headeroutcsv + "\n")
             else:
+                # TODO TODO TODO !!
                 print("Not like a csv header")
+            
             startline = md5dfir.upper() + "," + dfirname.upper() + ","
             if not withcompName:
                 startline += compName.upper() + ","
-            newline = startline + inpcsv.readline() + "\n"
-            print(newline)
-            outcsv.write(newline)
-            '''rdfile = csv.DictReader(csvfile)
-            print("+++++ " + str(rdfile.fieldnames) +" +++++")
-            for row in rdfile:
-                print(pf)'''
+            
+            for line in inpcsv:
+                newline = startline + line
+                outcsv.write(newline)
         inpcsv.close()
         outcsv.close()
         return False
