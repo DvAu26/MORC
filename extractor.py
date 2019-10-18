@@ -48,14 +48,14 @@ class Extractor:
         if not os.path.isdir(self.wk_dir+self.md5_recup(f)+"/"):
             print("Extracting file : " + f)
             if self.extrac_file(f):
-                print("=== Extract OK in the MD5 folder ===")
+                # print("=== Extract OK in the MD5 folder ===")
                 self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
             else:
                 print("**** Error extracting file : " + f + "****")
                 os.remove(self.in_dir+f+".working")
         else:
-            print("=== MD5 dir exist ===")
-            print(f)
+            # print("=== MD5 dir exist ===")
+            # print(f)
             self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
 
     def run3 (self,path):
@@ -65,12 +65,12 @@ class Extractor:
         if not os.path.isdir(path+".dir"):
             print("Extracting file : " + path)
             if self.extrac_path(path):
-                print("=== Extract OK ===")
+                # print("=== Extract OK ===")
                 self.q_extd.put(path+".dir/")
             else:
                 print("**** Error extracting file : " + path + "****")
         else:
-            print("=== Directory exist ===")
+            # print("=== Directory exist ===")
             self.q_extd.put(path+".dir/")
 
     def extrac_file (self,f):

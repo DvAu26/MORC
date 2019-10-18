@@ -40,8 +40,8 @@ class Hasher:
         print("Hasher on : " + f)
         md5_file = self.calc_md5(f)        
         if not self.check_md5_file(f) and not os.path.isfile(self.in_dir+f+".md5"):
-            print("No .md5 file for the file : " + f)
-            print("It will generate ...")
+            # print("No .md5 file for the file : " + f)
+            # print("It will generate ...")
             with open(self.in_dir+f+".md5","w") as mdfile:
                 mdfile.write(md5_file + " " + f)
                 mdfile.close()

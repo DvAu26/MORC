@@ -63,9 +63,9 @@ class Dispatcher:
         # make the directory OUTPUT
         md5f = self.md5_recup_from_f(f)
         if not os.path.isdir(self.ou_dir+md5f+"/LOGS/"):
-            print("=== Directory OUTPUT ... ===")
+            # print("=== Directory OUTPUT ... ===")
             os.mkdir(self.ou_dir+md5f)
-            fo = open(self.ou_dir+md5f+"/"+f+".orginalName","w")
+            fo = open(self.ou_dir+md5f+"/"+f+".originalName","w")
             fo.close()
             for d in self.dir_ou:
                 os.mkdir(self.ou_dir+md5f+"/"+d)
@@ -90,7 +90,7 @@ class Dispatcher:
                     self.q_extrap.put(os.path.join(root,name))
                 else:
                     if name.find(".log") >= 0:
-                        print("=== Copy log file " + name + " in OUTPUT/MD5/Filename.dir/LOGS ===")
+                        # print("=== Copy log file " + name + " in OUTPUT/MD5/Filename.dir/LOGS ===")
                         if os.path.isfile(self.ou_dir+md5p+"/LOGS/"+name):
                             namec = name.split(".")[0] + "_" + str(random.randint(1000,9999)) + ".log"
                             shutil.copy2(os.path.join(root,name),self.ou_dir+md5p+"/LOGS/"+namec,follow_symlinks=False)
