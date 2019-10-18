@@ -1,16 +1,20 @@
 # MORC
+
 Auto extract french DFIR ORC
 
 ## Requirements
 
 
 ```
-sudo apt install p7zip-full log2timeline python3-magic python3-plaso python3-pip
+sudo apt install p7zip-full log2timeline python3-magic python3-plaso 
+python3-pip python3-csvkit
 ```
 
 ```
 python hashlib
 ```
+
+Optional. Use if you want 7zip python extraction and not 7zip subprocess.
 
 ```
 sudo pip3 pyunpack patool
