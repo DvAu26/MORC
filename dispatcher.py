@@ -48,6 +48,9 @@ class Dispatcher:
             if self.q_extrad.qsize() > 0:
                 dir_ext = self.q_extrad.get()
                 _thread.start_new_thread(self.run4,(dir_ext,))
+            if self.q_csved.qsize() > 0:
+                dir_csv = self.q_csved.get()
+                _thread.start_new_thread(self.run5,(dir_csv,))
 
 
     def run2 (self,f):
@@ -111,6 +114,12 @@ class Dispatcher:
         # Copy and move CSV
         # Check timeline
         # Create timeline
+
+    def run5 (self,f):
+        # Csv output to go to Splunk or others
+        print("Splunk going on : " + f)
+        # self.q_splunk.put(f)
+
 
     def md5_recup_from_f (self,f):
         # Method to not calculate but extract from the

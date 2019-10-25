@@ -44,57 +44,52 @@ class Csver:
         # Test if ComputerName is present
         # Add columns MD5DFIR, NameDFIR, ComputerName if not present
         print("CSVer on : " + pf)
-        if self.check_csv(pf):
-            if self.clean_header(pf):
-                if self.add_columns(pf):
-                    print("CSV OK go to CSV_Splunk OUTPUT")
-                else:
-                     print("**** Error CSVer 3 "+pf+" ****")
-            else:
-                print("**** Error CSVer 2 "+pf+" ****")
-        else:
-            print("**** Error CSVer 1 "+pf+" ****")
 
-    def check_csv (self,pf):
         # Method to check, 1st line like an CSV header
         # If not find it and put it at the header place
-        print("Check csv : " + pf)
+        
         # TODO check if not empty !!
         md5dfir = self.get_md5(pf)
         dfirname = self.get_dfir_originalName(md5dfir) + ".7z"
         filename = pf.split("/")[-1]
+        
         # !! ComputerName with _ will have a named part !!
         compName = dfirname.split("_")[2]
         withcompName = False
+        
         if filename.find("GetThis.csv") >= 0 or filename.find("volstat") >= 0:
             newfilename = pf.split("/")[-2].split(".")[0] + "_" + filename
         else:
             newfilename = filename
         
         with open(pf, newline='',encoding='utf-8', errors='ignore') as inpcsv, open(self.ou_dir+md5dfir+"/CSV_Splunk/"+newfilename, "w", encoding='utf-8') as outcsv:
-            headerinpcsv = inpcsv.readline()
-            if len(headerinpcsv.split(",")) > 1:
-                if headerinpcsv.find("ComputerName") >= 0 and headerinpcsv.find("PSComputerName") < 0:
-                    headeroutcsv = ",".join(COLUMNS_ADDED)
-                    withcompName = True
-                else:
-                    headeroutcsv = ",".join(COLUMNS_ADDED) + "," + str(OPT_COLUMNS_ADDED)
-                headeroutcsv += "," + ",".join(self.clean_header(headerinpcsv))
-                outcsv.write(headeroutcsv + "\n")
+            while True:
+                headerinpcsv = inpcsv.readline()
+                if len(headerinpcsv.split(",")) > 1:
+                    break
+            
+            if headerinpcsv.find("ComputerName") >= 0 and headerinpcsv.find("PSComputerName") < 0:
+                headeroutcsv = ",".join(COLUMNS_ADDED)
+                withcompName = True
             else:
-                # TODO TODO TODO !!
-                print("Not like a csv header")
+                headeroutcsv = ",".join(COLUMNS_ADDED) + "," + str(OPT_COLUMNS_ADDED)
+            headeroutcsv += "," + ",".join(self.clean_header(headerinpcsv))
+            outcsv.write(headeroutcsv + "\n")
             
             startline = md5dfir.upper() + "," + dfirname.upper() + ","
             if not withcompName:
                 startline += compName.upper() + ","
             
             for line in inpcsv:
-                newline = startline + line
-                outcsv.write(newline)
+                if len(line.strip()) > 2:
+                    newline = startline + line.strip() + "\n"
+                    outcsv.write(newline)
+        
         inpcsv.close()
         outcsv.close()
-        return False
+        
+        # Queue out to be pushed in Splunk or another software
+        self.q_out.put(self.ou_dir+md5dfir+"/CSV_Splunk/"+newfilename)
 
     def clean_header (self,header):
         # Method to clean the header 
@@ -114,11 +109,6 @@ class Csver:
             # To append in the tuple
             tpclhead = tpclhead + (strstithead,)
         return tpclhead
-
-    def add_columns (self,pf):
-        # Method to add columns in the header and
-        # in the csv with MD5DFIR, NameDFIR, ComputerName
-        print("Add Columns csv : " + pf)
 
     def get_md5 (self,pf):
         # Method to get the DFIR MD5 from a pathfile
