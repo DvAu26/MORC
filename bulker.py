@@ -49,7 +49,7 @@ class Bulker:
         p = subprocess.Popen(["bulk_extractor","-e","all","-o"+self.wk_dir+self.get_md5(pf)+"/bulk_extract_"+self.getfile(pf),pf], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
             print(line)
-            if str(line).find("Everything is Ok") >= 0:
+            if str(line).find("All Threads Finished!") >= 0:
                 return True
             else:
                 continue
