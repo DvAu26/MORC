@@ -107,7 +107,6 @@ class Dispatcher:
                             print("=== CSVer file : " + os.path.join(root,name) + " ===")
                             self.q_csv.put(os.path.join(root,name))
                         else:
-                            
                             if name.find("swap") >= 0 or name.find("pagefile") >=0:
                                 self.q_blk.put(os.path.join(root,name))
                             else:
