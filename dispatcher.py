@@ -13,7 +13,7 @@ import random
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_dir,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,i_dir,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
@@ -23,6 +23,9 @@ class Dispatcher:
         self.q_hashed = q_hsd
         self.q_csv = i_csv
         self.q_csved = o_csv
+        self.q_blk = i_blk
+        # self.q_splk = i_spl
+        # self.q_splkd = o_spl
         self.in_dir = i_dir
         self.wk_dir = w_dir
         self.ou_dir = o_dir
@@ -104,10 +107,14 @@ class Dispatcher:
                             print("=== CSVer file : " + os.path.join(root,name) + " ===")
                             self.q_csv.put(os.path.join(root,name))
                         else:
-                            # ------
-                            # Here to put an queue_regin.put(...) with check magic.
-                            # ------
-                            print("=== File : " + os.path.join(root,name) + " ===")
+                            
+                            if name.find("swap") >= 0 or name.find("pagefile") >=0:
+                                self.q_blk.put(os.path.join(root,name))
+                            else:
+                                # ------
+                                # Here to put an queue_regin.put(...) with check magic.
+                                # ------
+                                print("=== File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
         # Check CSV?

@@ -14,11 +14,19 @@ python3-pip python3-csvkit
 python hashlib
 ```
 
+Bulk_extractor install, follow : https://github.com/simsong/bulk_extractor
+
+```
+git clone https://github.com/simsong/bulk_extractor.git
+```
+
+
 Optional. Use if you want 7zip python extraction and not 7zip subprocess.
 
 ```
 sudo pip3 pyunpack patool
 ```
+
 
 
 ## Roadmap
