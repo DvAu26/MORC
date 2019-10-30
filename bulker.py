@@ -37,18 +37,18 @@ class Bulker:
         # Extract data from files with bulk_extractor
         # Extract in WORKSPACE to be dispatch in OUTPUT
         print("Bulker on : " + pf)
-        if self.extrac_file(pf):
+        bulk_out = self.wk_dir+self.get_md5(pf)+"/bulk_extract_"+self.getfile(pf)
+        if self.extrac_file(pf,bulk_out):
             print("Bulk extract OK")
         else:
             print("Bulk extract NOK")
         
 
-    def extrac_file (self, pf):
+    def extrac_file (self, pf, out_dir):
         # Method to extract file f from the WORK_DIR in the WORK_DIR
         # with the MD5(pf) as extracting directory
-        p = subprocess.Popen(["bulk_extractor","-e","all","-o"+self.wk_dir+self.get_md5(pf)+"/bulk_extract_"+self.getfile(pf),pf], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        p = subprocess.Popen(["bulk_extractor","-e","all","-o"+out_dir,pf], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
-            print(line)
             if str(line).find("All Threads Finished!") >= 0:
                 return True
             else:
