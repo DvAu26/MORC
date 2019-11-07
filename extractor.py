@@ -78,7 +78,7 @@ class Extractor:
         # with the MD5(f) as extracting directory
         # TODO add default password DFIR-ORC anywhere
         # p = Archive(self.in_dir+f).extractall(self.wk_dir+self.md5_recup(f)+"/",auto_create_dir=True)
-        p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        p = subprocess.Popen(["7z","x",self.in_dir+f,"-o"+self.wk_dir+self.md5_recup(f)+"/","-pV!ruS"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
             if str(line).find("Everything is Ok") >= 0:
                 return True
@@ -98,7 +98,7 @@ class Extractor:
     def extrac_path (self,pth):
         # Method to extract file from a path (WORK_DIR) to path.dir
         # TODO add default password DFIR-ORC anywhere
-        p = subprocess.Popen(["7z","x",pth,"-o"+pth+".dir/"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        p = subprocess.Popen(["7z","x",pth,"-o"+pth+".dir/","-pV!ruS"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         # p = Archive(pth).extractall(+pth+".dir/",auto_create_dir=True)
         for line in p.stdout:
             if str(line).find("Everything is Ok") >= 0:
