@@ -110,15 +110,17 @@ class Dispatcher:
                             if name.find("swap") >= 0 or name.find("pagefile") >=0:
                                 self.q_blk.put(os.path.join(root,name))
                             else:
-                                # ------
-                                # Here to put an queue_regin.put(...) with check magic.
-                                # ------
-                                print("=== File : " + os.path.join(root,name) + " ===")
+                                # Avcheck part
+                                if (root.find("Scripts.7z.d") >= 0 or root.find("TempExe.7z.d") >= 0) and name.find("_data"):
+                                    self.q_av.put(os.path.join(root,name))
+                                else:
+                                    # ------
+                                    # Here to put an queue_regin.put(...) with check magic.
+                                    # ------
+                                    print("=== File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
-        # Check CSV?
-        # Copy and move CSV
-        # Check timeline
+        # Check timeline -> Mem
         # Create timeline
 
     def run5 (self,f):

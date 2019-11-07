@@ -15,6 +15,7 @@ from extractor import Extractor
 from csver import Csver
 from bulker import Bulker
 from volWorker import VolWorker
+from avcheck import Avcheck
 
 # TODO
 # Incident response identification... IRXXX or other.
@@ -75,7 +76,7 @@ if __name__ == '__main__':
     blk = Bulker(queue_blk,queue_extraced,WORK_DIR,OUT_DIR)
     vol = VolWorker(queue_vol,queue_rslt,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
-    #avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
+    avc = Avcheck(queue_av,WORK_DIR,OUT_DIR+DIR_OUT[0]+"/")
 
     see.start()
     dis.start()
@@ -85,7 +86,7 @@ if __name__ == '__main__':
     blk.start()
     vol.start()
     #tim.start()
-    #avc.start()
+    avc.start()
 
     input()
 
@@ -97,4 +98,4 @@ if __name__ == '__main__':
     blk.stop()
     vol.stop()
     #tim.stop()
-    #avc.stop()
+    avc.stop()
