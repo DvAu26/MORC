@@ -36,7 +36,6 @@ class Avcheck:
         # Copy from WORKSPACE to OUTPUT/AVCheck
         print("AVCheck on : " + pf)
         if not os.path.isfile(self.ou_dir+self.get_md5(pf)+"/AV_CHECK/"+self.get_filename(pf)):
-            print("--- AvCheck - Copy to --> " + self.ou_dir)
             shutil.copy2(pf,self.ou_dir+self.get_md5(pf)+"/AV_CHECK/",follow_symlinks=False)
 
 
