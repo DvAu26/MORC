@@ -35,3 +35,19 @@ class Avcheck:
     def run2 (self,pf):
         # Copy from WORKSPACE to OUTPUT/AVCheck
         print("AVCheck on : " + pf)
+        if not os.path.isfile(self.ou_dir+self.get_md5(pf)+"/AV_CHECK/"+self.get_filename(pf)):
+            print("--- AvCheck - Copy to --> " + self.ou_dir)
+            shutil.copy2(pf,self.ou_dir+self.get_md5(pf)+"/AV_CHECK/",follow_symlinks=False)
+
+
+    def get_filename (self,pf):
+        # Method to get the filename from a pathfile
+        return pf.split("/")[-1]
+
+    def get_md5 (self,pf):
+        # Method to get the DFIR MD5 from a pathfile
+        tpath = pf.split("/")
+        for d in tpath:
+            if len(d) == 32:
+                return d
+        return ""

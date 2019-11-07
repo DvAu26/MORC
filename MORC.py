@@ -76,7 +76,7 @@ if __name__ == '__main__':
     blk = Bulker(queue_blk,queue_extraced,WORK_DIR,OUT_DIR)
     vol = VolWorker(queue_vol,queue_rslt,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
-    avc = Avcheck(queue_av,WORK_DIR,OUT_DIR+DIR_OUT[0]+"/")
+    avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
     see.start()
     dis.start()
