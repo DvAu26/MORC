@@ -43,7 +43,7 @@ DIR_OUT = ["AV_CHECK","CSV_Splunk","TIMELINE","LOGS"]
 # Check time in the IN_DIR (milliseconds)
 CHECK_TIME = 500
 
-# Block size to calculate HASH 
+# Block size to calculate HASH
 BLOCK_SIZE_HASH = 4096
 
 if __name__ == '__main__':
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     ext = Extractor(queue_extrac,queue_extraced,queue_ext_path,IN_DIR,WORK_DIR)
     csv = Csver(queue_csv,queue_csved,WORK_DIR,OUT_DIR)
     blk = Bulker(queue_blk,queue_extraced,WORK_DIR,OUT_DIR)
-    mem = Memer(queue_mem,queue_memed,WORK_DIR,OUT_DIR)
+    mem = Memer(queue_mem,queue_extraced,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 

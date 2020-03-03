@@ -58,6 +58,9 @@ class Memer:
             # Testing profile suggested
             if self.prof_tester(f,profile):
                 print("profile OK")
+                for cmd in self.cmd_vol_csv:
+                    print("Memory_"+cmd+".csv")
+                    self.volWorkerOutputFile(f,profile,cmd,"csv",self.wk_dir+"Memory_"+cmd+".csv")
             else:
                 print("-- Not good profile - " + profile + " - for the file :\n" + f)
         else:
@@ -86,9 +89,12 @@ class Memer:
 
     def volWorker(self,f,prof,cmd,outfor):
         # Worker with volatility
-        result = ""
         p = subprocess.Popen(["vol.py","-f", str(f) , "--profile="+str(prof), "--output="+str(outfor), str(cmd)], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         return p.stdout
+
+    def volWorkerOutputFile(self,f,prof,cmd,outfor,outpfile):
+        # Worker with volatility
+        p = subprocess.Popen(["vol.py","-f", str(f) , "--profile="+str(prof), "--output="+str(outfor), "--output-file="str(outpfile), str(cmd)], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
 
     def profiler (self, f):
         # Only Windows with imageinfo, mac_get_profile or a "linux_get_profile"
