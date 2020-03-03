@@ -12,11 +12,11 @@ import shutil
 
 class VolWorker:
 
-    def __init__ (self,q_in,q_ou,w_dir,o_dir):
+    def __init__ (self,q_in,q_ou):
         self.q_inp = q_in
         self.q_out = q_ou
-        self.wk_dir = w_dir
-        self.ou_dir = o_dir
+        # self.wk_dir = w_dir
+        # self.ou_dir = o_dir
         self.end = False
         print("== INIT VolWorker ==")
 
@@ -50,4 +50,3 @@ class VolWorker:
         for line in p.stdout:
             result += line
         self.q_out.put(result)
-
