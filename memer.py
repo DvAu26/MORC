@@ -88,10 +88,7 @@ class Memer:
         # Worker with volatility
         result = ""
         p = subprocess.Popen(["vol.py","-f", str(f) , "--profile="+str(prof), "--output="+str(outfor), str(cmd)], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
-        for line in p.stdout:
-            result += line
-        print(result)
-        return result
+        return p.stdout
 
     def profiler (self, f):
         # Only Windows with imageinfo, mac_get_profile or a "linux_get_profile"
@@ -120,7 +117,7 @@ class Memer:
         print("Profile tester : " + str(f) + "  " + str(prof))
         # Windows profile but linux and mac too.
         r = self.volWorker(str(f),str(prof),"pslist","text")
-        for line in r.readlines:
+        for line in r:
             print(line)
             if str(line).find("0x") >=0 and str(line).find("lsass"):
                 okay = True
