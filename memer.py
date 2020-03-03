@@ -117,7 +117,7 @@ class Memer:
         okay = False
         print("Profile tester : " + str(f) + "  " + str(prof))
         # Windows profile but linux and mac too.
-        result = self.volWorker(str(f),str(profile),"pslist","text")
+        result = self.volWorker(str(f),str(prof),"pslist","text")
         for line in result:
             # print(line)
             if str(line).find("0x") >=0 and str(line).find("lsass"):
