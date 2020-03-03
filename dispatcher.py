@@ -106,7 +106,7 @@ class Dispatcher:
                             shutil.copy2(os.path.join(root,name),self.ou_dir+md5p+"/LOGS/",follow_symlinks=False)
                     else:
                         if name.find(".csv") >= 0:
-                            print("=== CSVer file : " + os.path.join(root,name) + " ===")
+                            # print("=== CSVer file : " + os.path.join(root,name) + " ===")
                             self.q_csv.put(os.path.join(root,name))
                         else:
                             # Bulkextractor over swap files
@@ -124,7 +124,7 @@ class Dispatcher:
                                         # ------
                                         # Here to put an queue_regin.put(...) with check magic.
                                         # ------
-                                        print("=== File : " + os.path.join(root,name) + " ===")
+                                        print("=== Pending File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
         # Check timeline -> Mem
