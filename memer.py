@@ -60,7 +60,7 @@ class Memer:
             if self.prof_tester(f,profile):
                 print("profile OK")
                 for cmd in self.cmd_vol_csv:
-                    print(self.wk_dir+self.md5_recup(f)+"/Memory_"+cmd+".csv")
+                    print(self.wk_dir+self.get_md5(f)+"/Memory_"+cmd+".csv")
                     self.volWorkerOutputFile(f,profile,cmd,"csv",self.wk_dir+self.get_md5(f)+"/Memory_"+cmd+".csv")
                     time.sleep(30)
             else:
