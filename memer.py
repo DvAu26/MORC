@@ -90,6 +90,7 @@ class Memer:
         p = subprocess.Popen(["vol.py","-f", str(f) , "--profile="+str(prof), "--output="+str(outfor), str(cmd)], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
         for line in p.stdout:
             result += line
+        print(result)
         return result
 
     def profiler (self, f):
@@ -118,9 +119,9 @@ class Memer:
         okay = False
         print("Profile tester : " + str(f) + "  " + str(prof))
         # Windows profile but linux and mac too.
-        result = self.volWorker(str(f),str(prof),"pslist","text")
-        for line in result:
-            # print(line)
+        r = self.volWorker(str(f),str(prof),"pslist","text")
+        for line in r:
+            print(line)
             if str(line).find("0x") >=0 and str(line).find("lsass"):
                 okay = True
         return okay
