@@ -68,7 +68,7 @@ class Memer:
         # Only Windows with imageinfo, mac_get_profile or a "linux_get_profile"
         profilers = []
         serv_pack = ""
-        result = subprocess.Popen(["vol.py","-f", f , "imageinfo", "--output=text"], stdout=subprocess.PIPE, universal_newlines=True, encoding="utf-8", errors="replace")
+        result = subprocess.Popen(["vol.py","-f", f , "imageinfo", "--output=text"], stdout=subprocess.PIPE)
         for line in result.stdout:
             line = str(line).replace('\n',' ')
             strip_line = str(line).strip()
