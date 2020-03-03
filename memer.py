@@ -61,7 +61,7 @@ class Memer:
                 print("profile OK")
                 for cmd in self.cmd_vol_csv:
                     print(self.wk_dir+self.md5_recup(f)+"/Memory_"+cmd+".csv")
-                    self.volWorkerOutputFile(f,profile,cmd,"csv",self.wk_dir+self.md5_recup(f)+"/Memory_"+cmd+".csv")
+                    self.volWorkerOutputFile(f,profile,cmd,"csv",self.wk_dir+self.get_md5(f)+"/Memory_"+cmd+".csv")
                     time.sleep(30)
             else:
                 print("-- Not good profile - " + profile + " - for the file :\n" + f)
@@ -131,11 +131,10 @@ class Memer:
                 okay = True
         return okay
 
-    def md5_recup (self,f):
-        # Method to not calculate but extract from the
-        # f.md5 in the IN_DIR
-        with open(self.in_dir+f+".md5") as hfile:
-            f_line = hfile.readline()
-            f_other = hfile.read()
-            hfile.close()
-        return str(f_line.split()[0]).upper()
+    def get_md5 (self,pf):
+        # Method to get the DFIR MD5 from a pathfile
+        tpath = pf.split("/")
+        for d in tpath:
+            if len(d) == 32:
+                return d
+        return ""
