@@ -13,7 +13,7 @@ import random
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,i_dir,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,q_mem,q_memed,i_dir,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
@@ -24,6 +24,8 @@ class Dispatcher:
         self.q_csv = i_csv
         self.q_csved = o_csv
         self.q_blk = i_blk
+        self.q_mem = q_mem
+        self.q_memed = q_memed
         # self.q_splk = i_spl
         # self.q_splkd = o_spl
         self.in_dir = i_dir
@@ -107,6 +109,7 @@ class Dispatcher:
                             print("=== CSVer file : " + os.path.join(root,name) + " ===")
                             self.q_csv.put(os.path.join(root,name))
                         else:
+                            # Bulkextractor over swap files
                             if name.find("swap") >= 0 or name.find("pagefile") >=0:
                                 self.q_blk.put(os.path.join(root,name))
                             else:
@@ -114,10 +117,14 @@ class Dispatcher:
                                 if (root.find("Scripts.7z.d") >= 0 or root.find("TempExe.7z.d") >= 0) and name.find("_data"):
                                     self.q_av.put(os.path.join(root,name))
                                 else:
-                                    # ------
-                                    # Here to put an queue_regin.put(...) with check magic.
-                                    # ------
-                                    print("=== File : " + os.path.join(root,name) + " ===")
+                                    # Memory process
+                                    if name.find("iberfil.s") or (name.find("emory_") >= 0 and (name.find(".aff4") >= 0 or name.find(".raw"))):
+                                        self.q_mem.put(os.path.join(root,name))
+                                    else:
+                                        # ------
+                                        # Here to put an queue_regin.put(...) with check magic.
+                                        # ------
+                                        print("=== File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
         # Check timeline -> Mem
