@@ -14,8 +14,8 @@ from hasher import Hasher
 from extractor import Extractor
 from csver import Csver
 from bulker import Bulker
-from volWorker import VolWorker
 from avcheck import Avcheck
+from memer import Memer
 
 # TODO
 # Incident response identification... IRXXX or other.
@@ -65,16 +65,16 @@ if __name__ == '__main__':
     queue_csved = queue.Queue()
     queue_blk = queue.Queue()
     queue_mem = queue.Queue()
-    queue_vol = queue.Queue()
+    queue_memed = queue.Queue()
     queue_rslt = queue.Queue()
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_ext_path,queue_av,queue_hash,queue_hashed,queue_csv,queue_csved,queue_blk,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_ext_path,queue_av,queue_hash,queue_hashed,queue_csv,queue_csved,queue_blk,queue_mem,queue_memed,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
     has = Hasher(queue_hash,queue_hashed,IN_DIR,WORK_DIR,BLOCK_SIZE_HASH)
     ext = Extractor(queue_extrac,queue_extraced,queue_ext_path,IN_DIR,WORK_DIR)
     csv = Csver(queue_csv,queue_csved,WORK_DIR,OUT_DIR)
     blk = Bulker(queue_blk,queue_extraced,WORK_DIR,OUT_DIR)
-    vol = VolWorker(queue_vol,queue_rslt,WORK_DIR,OUT_DIR)
+    mem = Memer(queue_mem,queue_memed,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
 
@@ -83,8 +83,8 @@ if __name__ == '__main__':
     has.start()
     ext.start()
     csv.start()
-    blk.start()
-    vol.start()
+    #blk.start()
+    mem.start()
     #tim.start()
     avc.start()
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     has.stop()
     ext.stop()
     csv.stop()
-    blk.stop()
-    vol.stop()
+    #blk.stop()
+    mem.stop()
     #tim.stop()
     avc.stop()
