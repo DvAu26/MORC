@@ -23,8 +23,8 @@ class Memer:
         self.end = False
         self.cmd_vol_dump = ["cachedump","dlldump","dumpcerts","dumpfiles","dumpregistry","hashdump","hivedump","lsadump","memdump","moddump","procdump","vaddump"]
         self.cmd_vol_csv = ["amcache","apihooks","atoms","atomscan","auditpol","bigpools","bioskbd","callbacks","clipboard","cmdline","cmdscan","connections","connscan","consoles","crashinfo","deskscan","devicetree","dlllist","driverirp","drivermodule","driverscan","editbox","envars","eventhooks","evtlogs","filescan","gahti","gditimers","gdt","getservicesids","getsids","handles","hibinfo","hivelist","hivescan","hpakextract","hpakinfo","idt","iehistory","impscan","joblinks","kdbgscan","kpcrscan","ldrmodules","machoinfo","malfind","mbrparser","memmap","messagehooks","modscan","modules","multiscan","mutantscan","notepad","objtypescan","patcher","poolpeek","printkey","privs","pslist","psscan","pstree","psxview","screenshot","servicediff","sessions","shimcache","shutdowntime","sockets","sockscan","ssdt","strings","svcscan","symlinkscan","thrdscan","threads","timers","truecryptmasterRecover","truecryptpassphraseTrueCrypt","truecryptsummaryTrueCrypt","unloadedmodulesPrint","userassist","userhandles","vadinfo","vadtree","vadwalk","vboxinfo","verinfo","windows","wintree","wndscan","yarascan"]
-        # self.cmd_vol_timeline = ["mftparser","shellbags","timeliner"]
-        self.vol = VolWorker(self.q_in,self.q_ou)
+        self.cmd_vol_timeline = ["mftparser","shellbags","timeliner"]
+        # self.vol = VolWorker(self.q_in,self.q_ou)
         print("== INIT Memer ==")
 
     def start (self):
