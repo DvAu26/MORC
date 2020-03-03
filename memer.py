@@ -56,7 +56,7 @@ class Memer:
         if len(profile) > 1:
             # Profile Find
             # Testing profile suggested
-            if tester(f,profile):
+            if self.prof_tester(f,profile):
                 print("profile OK")
             else:
                 print("-- Not good profile - " + profile + " - for the file :\n" + f)
