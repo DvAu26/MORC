@@ -87,7 +87,7 @@ class Memer:
     def volWorker(self,f,prof,cmd,outfor):
         # Worker with volatility
         result = ""
-        p = subprocess.Popen(["vol.py","-f", str(f) , "--profile="+str(prof), "--output="+str(outfor), str(cmd)], stdout=subprocess.PIPE)
+        p = subprocess.Popen(["vol.py","-f", str(f) , "--profile="+str(prof), "--output="+str(outfor), str(cmd)], stdout=subprocess.PIPE, encoding="utf-8", errors="replace")
         for line in p.stdout:
             result += line
         print(result)
