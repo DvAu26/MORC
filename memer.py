@@ -19,6 +19,9 @@ class Memer:
         self.wk_dir = w_dir
         self.ou_dir = o_dir
         self.end = False
+        self.cmd_vol_dump = [cachedump,dlldump,dumpcerts,dumpfiles,dumpregistry,hashdump,hivedump,lsadump,memdump,moddump,procdump,vaddump]
+        self.cmd_vol_csv = [amcache,apihooks,atoms,atomscan,auditpol,bigpools,bioskbd,callbacks,clipboard,cmdline,cmdscan,connections,connscan,consoles,crashinfo,deskscan,devicetree,dlllist,driverirp,drivermodule,driverscan,editbox,envars,eventhooks,evtlogs,filescan,gahti,gditimers,gdt,getservicesids,getsids,handles,hibinfo,hivelist,hivescan,hpakextract,hpakinfo,idt,iehistory,impscan,joblinks,kdbgscan,kpcrscan,ldrmodules,machoinfo,malfind,mbrparser,memmap,messagehooks,modscan,modules,multiscan,mutantscan,notepad,objtypescan,patcher,poolpeek,printkey,privs,pslist,psscan,pstree,psxview,screenshot,servicediff,sessions,shimcache,shutdowntime,sockets,sockscan,ssdt,strings,svcscan,symlinkscan,thrdscan,threads,timers,truecryptmasterRecover,truecryptpassphraseTrueCrypt,truecryptsummaryTrueCrypt,unloadedmodulesPrint,userassist,userhandles,vadinfo,vadtree,vadwalk,vboxinfo,verinfo,windows,wintree,wndscan,yarascan]
+        self.cmd_vol_timeline = [mftparser,shellbags,timeliner]
         # self.vol = VolWorker(q_in,q_ou,self.wk_dir,self.ou_dir)
         print("== INIT Memer ==")
 
@@ -37,6 +40,15 @@ class Memer:
 
     def run2 (self,f):
         print("Memer on : " + f)
+        # -------------------
+        # 1 - Get the profile
+        # 2 - Check the profile
+        # 3 - Get the memory timeline
+        # 4 - Get out text memory (pslist, netscan, dlllist...)
+        # 5 - Get out dump memory (vaddump, dlldump...)
+        # VolVorker : f = file## o = output format## c = command## p = profile
+        # --------------------
+        print(f + "##csv##imageinfo##profile")
         profile = self.profiler(f)
         print("Profil --> " + profile)
 
