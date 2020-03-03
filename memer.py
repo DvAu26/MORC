@@ -13,11 +13,12 @@ from volWorker import VolWorker
 
 class Memer:
 
-    def __init__ (self,q_mem,q_memed,w_dir,o_dir):
+    def __init__ (self,q_mem,q_memed,i_dir,w_dir,o_dir):
         self.q_mem = q_mem
         self.q_memed = q_memed
         self.wk_dir = w_dir
         self.ou_dir = o_dir
+        self.in_dir = i_dir
         # self.q_in = queue.Queue()
         # self.q_ou = queue.Queue()
         self.end = False
