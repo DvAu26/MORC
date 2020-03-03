@@ -59,8 +59,9 @@ class Memer:
             if self.prof_tester(f,profile):
                 print("profile OK")
                 for cmd in self.cmd_vol_csv:
-                    print("Memory_"+cmd+".csv")
-                    self.volWorkerOutputFile(f,profile,cmd,"csv",self.wk_dir+"Memory_"+cmd+".csv")
+                    print(self.wk_dir+self.md5_recup(f)+"/Memory_"+cmd+".csv")
+                    self.volWorkerOutputFile(f,profile,cmd,"csv",self.wk_dir+self.md5_recup(f)+"/Memory_"+cmd+".csv")
+                    time.sleep(30)
             else:
                 print("-- Not good profile - " + profile + " - for the file :\n" + f)
         else:
@@ -124,7 +125,16 @@ class Memer:
         # Windows profile but linux and mac too.
         r = self.volWorker(str(f),str(prof),"pslist","text")
         for line in r:
-            print(line)
+            # print(line)
             if str(line).find("0x") >=0 and str(line).find("lsass"):
                 okay = True
         return okay
+
+    def md5_recup (self,f):
+        # Method to not calculate but extract from the
+        # f.md5 in the IN_DIR
+        with open(self.in_dir+f+".md5") as hfile:
+            f_line = hfile.readline()
+            f_other = hfile.read()
+            hfile.close()
+        return str(f_line.split()[0]).upper()
