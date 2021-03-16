@@ -118,8 +118,9 @@ class Dispatcher:
                                     self.q_av.put(os.path.join(root,name))
                                 else:
                                     # Memory process
-                                    if ((name.find("iberfil.s") >= 0 or (name.find("emory_") >= 0)) and (name.find(".aff4") >= 0 or name.find(".raw"))):
-                                        self.q_mem.put(os.path.join(root,name))
+                                    if name.find("iberfil.s") >= 0 or name.find("emory_") >= 0: 
+                                        if name.find(".aff4") >= 0 or name.find(".raw"):
+                                            self.q_mem.put(os.path.join(root,name))
                                     else:
                                         # ------
                                         # Here to put an queue_regin.put(...) with check magic.
