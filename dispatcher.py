@@ -119,7 +119,7 @@ class Dispatcher:
                                 else:
                                     # Memory process
                                     if name.find("iberfil.s") >= 0 or name.find("emory_") >= 0: 
-                                        if name.find(".aff4") >= 0 or name.find(".raw"):
+                                        if name.find(".aff4") >= 0 or name.find(".raw") >= 0:
                                             self.q_mem.put(os.path.join(root,name))
                                     else:
                                         # ------
