@@ -4,20 +4,20 @@ Auto extract french DFIR ORC
 
 ## Requirements
 
-. Install fresh Ubuntu 20.04 x64
+.Install fresh Ubuntu 20.04 x64
 
-. Update and upgrade packages
+.Update and upgrade packages
 
 ```
 sudo apt update && sudo apt upgrade
 ```
 
-. Install packages for MORC and Bulk_extractor
+.Install packages for MORC and Bulk_extractor
 
 ```
 sudo apt install p7zip-full python3-magic python3-pip autoconf automake
 ```
-. Install Bulk extractor
+.Install Bulk extractor
 
 Bulk_extractor install, follow : https://github.com/simsong/bulk_extractor
 
@@ -31,7 +31,7 @@ $ make
 $ sudo make install
 
 ```
-. Install python requirements
+.Install python requirements
 
 ```
 pip3 intall -r requirements.txt
