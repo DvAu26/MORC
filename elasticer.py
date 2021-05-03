@@ -44,7 +44,7 @@ class Elasticer:
         newfilename = filename + ".json"
  
         with open(self.ou_dir+md5dfir+"/CSV_Splunk/"+newfilename, "w", encoding='utf-8') as outjson:
-           result : List[dict] = evtx2json(pf)
+           result: List[dict] = evtx2json(pf)
            outjson.write(result)
         outjson.close() 
         
