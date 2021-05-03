@@ -39,7 +39,6 @@ class Elasticer:
         print("Elasticer on : " + pf)
         
         md5dfir = self.get_md5(pf)
-        dfirname = self.get_dfir_originalName(md5dfir) + ".7z"
         filename = pf.split("/")[-1]
         
         newfilename = filename + ".json"
