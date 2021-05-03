@@ -125,7 +125,7 @@ class Dispatcher:
                                     else:
                                         # EVTX to Elasticsearch
                                         if name.find("evtx_data") >= 0:
-										    self.q_es.put(os.path.join(root,name))
+                                            self.q_es.put(os.path.join(root,name))
                                         else:
                                             # ------
                                             # Here to put an queue_regin.put(...) with check magic.
