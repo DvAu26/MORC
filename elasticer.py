@@ -13,10 +13,9 @@ from evtx2es import evtx2es
 
 class Elasticer:
 
-    def __init__ (self,q_in,w_dir,o_dir):
+    def __init__ (self,q_in,w_dir):
         self.q_inp = q_in
         self.wk_dir = w_dir
-        self.ou_dir = o_dir
         self.end = False
         print("== INIT Elasticer ==")
 
