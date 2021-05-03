@@ -90,6 +90,7 @@ if __name__ == '__main__':
     mem.start()
     #tim.start()
     avc.start()
+    elas.start()
 
     input()
 
@@ -102,3 +103,4 @@ if __name__ == '__main__':
     mem.stop()
     #tim.stop()
     avc.stop()
+    elas.stop()
