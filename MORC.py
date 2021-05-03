@@ -16,6 +16,7 @@ from csver import Csver
 from bulker import Bulker
 from avcheck import Avcheck
 from memer import Memer
+from elasticer import Elasticer
 
 # TODO
 # Incident response identification... IRXXX or other.
@@ -67,9 +68,10 @@ if __name__ == '__main__':
     queue_mem = queue.Queue()
     queue_memed = queue.Queue()
     queue_rslt = queue.Queue()
+    queue_elastic = queue.Queue()
 
     see = Seeker(queue_dis,IN_DIR,BASE_NAME,CHECK_TIME)
-    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_ext_path,queue_av,queue_hash,queue_hashed,queue_csv,queue_csved,queue_blk,queue_mem,queue_memed,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
+    dis = Dispatcher(queue_dis,queue_extrac,queue_extraced,queue_ext_path,queue_av,queue_hash,queue_hashed,queue_csv,queue_csved,queue_blk,queue_mem,queue_memed,queue_elastic,IN_DIR,WORK_DIR,OUT_DIR,DIR_OUT)
     has = Hasher(queue_hash,queue_hashed,IN_DIR,WORK_DIR,BLOCK_SIZE_HASH)
     ext = Extractor(queue_extrac,queue_extraced,queue_ext_path,IN_DIR,WORK_DIR)
     csv = Csver(queue_csv,queue_csved,WORK_DIR,OUT_DIR)
@@ -77,6 +79,7 @@ if __name__ == '__main__':
     mem = Memer(queue_mem,queue_extraced,IN_DIR,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
+    elas = Elasticer(queue_elastic,WORK_DIR)
 
     see.start()
     dis.start()

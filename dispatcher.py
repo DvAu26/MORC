@@ -13,7 +13,7 @@ import random
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,q_mem,q_memed,i_dir,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,q_mem,q_memed,q_es,i_dir,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
@@ -26,6 +26,7 @@ class Dispatcher:
         self.q_blk = i_blk
         self.q_mem = q_mem
         self.q_memed = q_memed
+        self.q_es = q_es
         # self.q_splk = i_spl
         # self.q_splkd = o_spl
         self.in_dir = i_dir
@@ -122,10 +123,14 @@ class Dispatcher:
                                         if name.find(".aff4") >= 0 or name.find(".raw") >= 0:
                                             self.q_mem.put(os.path.join(root,name))
                                     else:
-                                        # ------
-                                        # Here to put an queue_regin.put(...) with check magic.
-                                        # ------
-                                        print("=== Pending File : " + os.path.join(root,name) + " ===")
+                                        # EVTX to Elasticsearch
+                                        if name.find("evtx_data") >= 0:
+											self.q_es.put(os.path.join(root,name))
+										else:
+                                            # ------
+                                            # Here to put an queue_regin.put(...) with check magic.
+                                            # ------
+                                            print("=== Pending File : " + os.path.join(root,name) + " ===")
         # Check AV?
         # Create AV arch
         # Check timeline -> Mem
