@@ -4,30 +4,38 @@ Auto extract french DFIR ORC
 
 ## Requirements
 
+. Install fresh Ubuntu 20.04 x64
+
+. Update and upgrade packages
 
 ```
-sudo apt install p7zip-full log2timeline python3-magic python3-plaso 
-python3-pip python3-csvkit
+sudo apt update && sudo apt upgrade
 ```
 
+. Install packages for MORC and Bulk_extractor
+
 ```
-python hashlib
+sudo apt install p7zip-full python3-magic python3-pip autoconf automake
 ```
+. Install Bulk extractor
 
 Bulk_extractor install, follow : https://github.com/simsong/bulk_extractor
 
 ```
-git clone https://github.com/simsong/bulk_extractor.git
+$ git clone https://github.com/simsong/bulk_extractor.git
+$ cd bulk_extractor
+$ ./etc/CONFIGURE_UBUNTU18LTS.bash
+$ ./bootstrap.sh
+$ ./configure
+$ make
+$ sudo make install
+
 ```
-
-
-Optional. Use if you want 7zip python extraction and not 7zip subprocess.
+. Install python requirements
 
 ```
-sudo pip3 pyunpack patool
+pip3 intall -r requirements.txt
 ```
-
-
 
 ## Roadmap
 
@@ -73,3 +81,12 @@ You will perform an Hash check or at least an Hash calculate before any action.
 - MORC launch __log2timeline/psort__ over evtx at least and put the csv timeline result in __OUT_DIR__/__MD5__/__CSV__/
 - MORC launch Tzworks binaries over the artefacts.
 - MORC launch Metadata extractor over the __EXE__ files.
+
+
+### OLD
+
+. Package APT
+
+```
+python3-csvkit python-plaso
+```
