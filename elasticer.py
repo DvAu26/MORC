@@ -9,13 +9,15 @@ import time
 import _thread
 import shutil
 from evtx2es import evtx2es
+from evtx2es import evtx2json
 
 
 class Elasticer:
 
-    def __init__ (self,q_in,w_dir):
+    def __init__ (self,q_in,w_dir,o_dir):
         self.q_inp = q_in
         self.wk_dir = w_dir
+        self.out_dir = o_dir
         self.end = False
         print("== INIT Elasticer ==")
 
@@ -35,6 +37,18 @@ class Elasticer:
     def run2 (self,pf):
         # Copy from WORKSPACE to OUTPUT/AVCheck
         print("Elasticer on : " + pf)
+        
+        md5dfir = self.get_md5(pf)
+        dfirname = self.get_dfir_originalName(md5dfir) + ".7z"
+        filename = pf.split("/")[-1]
+        
+        newfilename = filename + ".json"
+ 
+        with open(self.ou_dir+md5dfir+"/CSV_Splunk/"+newfilename, "w", encoding='utf-8') as outjson:
+           result : List[dict] = evtx2json(pf)
+           outjson.write(result)
+        outjson.close() 
+        
         evtx2es(pf, host="192.168.1.12", port=9200, index="MORC_evtx")
 
 
