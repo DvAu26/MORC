@@ -43,7 +43,7 @@ class Csver:
         # Others                             -> DFIR-ORC Artefacts
         # Test if ComputerName is present
         # Add columns MD5DFIR, NameDFIR, ComputerName if not present
-        print("CSVer on : " + pf)
+        # print("CSVer on : " + pf)
 
         # Method to check, 1st line like an CSV header
         # If not find it and put it at the header place
