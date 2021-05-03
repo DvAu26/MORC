@@ -8,7 +8,7 @@ import queue
 import time
 import thread
 import shutil
-import evtx2es import evtx2es
+from evtx2es import evtx2es
 
 
 class Elasticer:
