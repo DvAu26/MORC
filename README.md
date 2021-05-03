@@ -4,20 +4,20 @@ Auto extract french DFIR ORC
 
 ## Requirements
 
-.Install fresh Ubuntu 20.04 x64
+Install fresh Ubuntu 20.04 x64
 
-.Update and upgrade packages
+Update and upgrade packages
 
 ```
 sudo apt update && sudo apt upgrade
 ```
 
-.Install packages for MORC and Bulk_extractor
+Install packages for MORC and Bulk_extractor
 
 ```
 sudo apt install p7zip-full python3-magic python3-pip autoconf automake
 ```
-.Install Bulk extractor
+Install Bulk extractor
 
 Bulk_extractor install, follow : https://github.com/simsong/bulk_extractor
 
@@ -31,24 +31,15 @@ $ make
 $ sudo make install
 
 ```
-.Install python requirements
+Install python requirements
 
 ```
 pip3 intall -r requirements.txt
 ```
 
-## Roadmap
-
-Little roadmap :
-
-- PoC with subprocess and queues
-- PoC with celery tasker and rabbitmq (backend and broker)
-
 ## Using
 
-```
-git clone it
-```
+After install
 
 - Change the BASE_DIR in _MORC.py_
 - Change the BASE_NAME in _MORC.py_
@@ -69,7 +60,7 @@ The system archi will have a repository (export NFS, SMB, glusterFS...) with the
 The _DFIR-ORC_ format the output archives names.
 - __BASE_NAME__ : list of start name for your own _DFIR-ORCs_. ([BASE_NAME]\_[COMPUTER_NAME]\_[DATE]\_[SUFFIX_NAME].7z)
 
-### 1st Step
+### Little Workflow
 
 You will perform an Hash check or at least an Hash calculate before any action.
 
@@ -82,6 +73,13 @@ You will perform an Hash check or at least an Hash calculate before any action.
 - MORC launch Tzworks binaries over the artefacts.
 - MORC launch Metadata extractor over the __EXE__ files.
 
+
+## Roadmap
+
+Little roadmap :
+
+- PoC with subprocess and queues
+- PoC with celery tasker and rabbitmq (backend and broker)
 
 ### OLD
 
