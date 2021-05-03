@@ -29,7 +29,6 @@ $ ./bootstrap.sh
 $ ./configure
 $ make
 $ sudo make install
-
 ```
 Install python requirements
 
