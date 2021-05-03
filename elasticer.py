@@ -6,7 +6,7 @@ import magic
 import subprocess
 import queue
 import time
-import thread
+import _thread
 import shutil
 from evtx2es import evtx2es
 
