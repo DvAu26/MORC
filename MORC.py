@@ -79,7 +79,7 @@ if __name__ == '__main__':
     mem = Memer(queue_mem,queue_extraced,IN_DIR,WORK_DIR,OUT_DIR)
     #tim = Timeliner(queue_extrac,WORK_DIR,OUT_DIR)
     avc = Avcheck(queue_av,WORK_DIR,OUT_DIR)
-    elas = Elasticer(queue_elastic,WORK_DIR,OUT_DIR)
+    #elas = Elasticer(queue_elastic,WORK_DIR,OUT_DIR)
 
     see.start()
     dis.start()
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     mem.start()
     #tim.start()
     avc.start()
-    elas.start()
+    #elas.start()
 
     input()
 
@@ -103,4 +103,4 @@ if __name__ == '__main__':
     mem.stop()
     #tim.stop()
     avc.stop()
-    elas.stop()
+    #elas.stop()
