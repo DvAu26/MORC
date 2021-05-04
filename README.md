@@ -9,13 +9,13 @@ Auto extract french DFIR ORC
 2. Update and upgrade packages
 
 ```
-sudo apt update && sudo apt upgrade -y
+$ sudo apt update && sudo apt upgrade -y
 ```
 
 3. Install packages for MORC and Bulk_extractor
 
 ```
-sudo apt install p7zip-full python3-magic python3-pip autoconf automake default-jdk libewf-dev sqlite3 -y
+$ sudo apt install p7zip-full python3-magic python3-pip autoconf automake default-jdk libewf-dev sqlite3 -y
 ```
 
 4. Install Bulk extractor
@@ -23,40 +23,39 @@ sudo apt install p7zip-full python3-magic python3-pip autoconf automake default-
 Bulk_extractor install, follow : https://github.com/simsong/bulk_extractor
 
 ```
-cd ~
-git clone https://github.com/simsong/bulk_extractor.git --recursive
-cd bulk_extractor
-./etc/CONFIGURE_UBUNTU18LTS.bash
-chmod +x bootstrap.sh
-./bootstrap.sh
-./configure
-make
-sudo make install
-cd ~
+$ cd ~
+$ git clone https://github.com/simsong/bulk_extractor.git --recursive
+$ cd bulk_extractor
+$ ./etc/CONFIGURE_UBUNTU18LTS.bash
+$ chmod +x bootstrap.sh
+$ ./bootstrap.sh
+$ ./configure
+$ make
+$ sudo make install
+$ cd ~
 ```
 
 5. MORC work with lot of files, we can or must update your ulimits.
 
 ```
-sudo sysctl -w fs.file-max=1000000
+$ sudo sysctl -w fs.file-max=1000000
 
-sudo bash -c "cat <<EOF >> /etc/sysctl.conf
+$ sudo bash -c "cat <<EOF >> /etc/sysctl.conf
 # Ulimits max 1 000 000 files
 fs.file-max = 1000000
 EOF
 "
-echo
 
-sudo sysctl -p
+$ sudo sysctl -p
 ```
 
 6. Install MORC with its python requirements
 
 ```
-cd ~
-git clone https://github.com/DvAu26/MORC
-cd MORC
-pip3 install -r requirements.txt
+$ cd ~
+$ git clone https://github.com/DvAu26/MORC
+$ cd MORC
+$ pip3 install -r requirements.txt
 ```
 
 ## Using
