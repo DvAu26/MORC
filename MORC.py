@@ -47,7 +47,7 @@ DIR_OUT = config['WORKING_DIR']['DIR_OUT']
 BASE_NAME = config['BASE_DIR']['BASE_NAME']
 
 # Check time in the IN_DIR (milliseconds)
-CHECK_TIME = config['TIME']['CHECK_TIME']
+CHECK_TIME = int(config['TIME']['CHECK_TIME'])
 
 # Block size to calculate HASH
 BLOCK_SIZE_HASH = int(config['HASHES']['BLOCK_SIZE_HASH'])
