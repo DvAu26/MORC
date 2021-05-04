@@ -30,6 +30,7 @@ $ ./configure
 $ make
 $ sudo make install
 ```
+
 Install python requirements
 
 ```
@@ -42,7 +43,7 @@ MORC work with lot of files, we can update your ulimits.
 sudo sysctl -w fs.file-max=1000000
 ```
 
-Edit /etc/sysctl.conf (with vi or vim)
+Edit __/etc/sysctl.conf__ (with vi or vim)
 
 
 ```
@@ -66,8 +67,8 @@ sysctl -p
 
 After install
 
-- Change the BASE_DIR in _config.ini_
-- Change the BASE_NAME in _config.ini_
+- Change the __BASE_DIR__ in _config.ini_
+- Change the __BASE_NAME__ in _config.ini_
 
 To launch MORC
 
