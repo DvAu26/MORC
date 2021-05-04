@@ -39,7 +39,7 @@ class Seeker:
                     self.q_dis.put(f)
                     fw = open(self.in_dir+f+".working","w")
                     fw.close()
-                    print("Seeker : " + f)
+                    # print("Seeker : " + f)
             print("-- Sleeping for " + str(self.check_time) + "s --")
             time.sleep(self.check_time)
 

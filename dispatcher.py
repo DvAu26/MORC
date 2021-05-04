@@ -61,13 +61,13 @@ class Dispatcher:
 
     def run2 (self,f):
         # seeker send a file to be hashed
-        print("Dispatcher on : " + f)
+        # print("Dispatcher on : " + f)
         self.q_hash.put(f)
 
     def run3 (self,f):
         # hasher send a file to be extracted
         # MD5 calculated and f.md5 generated at least
-        print("Dispatch after hash on : " + f)
+        # print("Dispatch after hash on : " + f)
         self.q_extrac.put(f)
         # make the directory OUTPUT
         md5f = self.md5_recup_from_f(f)
