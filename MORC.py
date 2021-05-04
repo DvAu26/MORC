@@ -37,7 +37,7 @@ WORK_DIR = BASE_DIR + config['WORKING_DIR']['WORK_DIR']
 # Directory for the output result
 OUT_DIR = BASE_DIR + config['WORKING_DIR']['OUT_DIR']
 
-DIRECTORIES[] = config['WORKING_DIR']['DIRECTORIES']
+DIRECTORIES = [BASE_DIR,IN_DIR,WORK_DIR,OUT_DIR]
 
 # DIR OUTPUT arbo
 DIR_OUT[] = config['WORKING_DIR']['DIR_OUT']
