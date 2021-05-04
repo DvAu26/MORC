@@ -9,6 +9,7 @@ import time
 import _thread
 import shutil
 import configparser
+import ast
 from seeker import Seeker
 from dispatcher import Dispatcher
 from hasher import Hasher
@@ -40,11 +41,11 @@ OUT_DIR = BASE_DIR + config['WORKING_DIR']['OUT_DIR']
 DIRECTORIES = [BASE_DIR,IN_DIR,WORK_DIR,OUT_DIR]
 
 # DIR OUTPUT arbo
-DIR_OUT = config['WORKING_DIR']['DIR_OUT']
+DIR_OUT = ast.literal_eval(config['WORKING_DIR']['DIR_OUT'])
 
 # Base name for our DFIR-ORCs
 # BASE_NAME = ["ORCSYS","ORCMEM"]
-BASE_NAME = config['BASE_DIR']['BASE_NAME']
+BASE_NAME = ast.literal_eval(config['BASE_DIR']['BASE_NAME'])
 
 # Check time in the IN_DIR (milliseconds)
 CHECK_TIME = int(config['TIME']['CHECK_TIME'])
