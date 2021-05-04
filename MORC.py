@@ -31,11 +31,11 @@ config.read("config.ini")
 # Base directory
 BASE_DIR = config['WORKING_DIR']['BASE_DIR']
 # Directory with the DFIR-ORCs
-IN_DIR = config['WORKING_DIR']['IN_DIR']
+IN_DIR = BASE_DIR + config['WORKING_DIR']['IN_DIR']
 # Directory for the working process
-WORK_DIR = config['WORKING_DIR']['WORK_DIR']
+WORK_DIR = BASE_DIR + config['WORKING_DIR']['WORK_DIR']
 # Directory for the output result
-OUT_DIR = config['WORKING_DIR']['OUT_DIR']
+OUT_DIR = BASE_DIR + config['WORKING_DIR']['OUT_DIR']
 
 DIRECTORIES = config['WORKING_DIR']['DIRECTORIES']
 
