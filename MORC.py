@@ -8,6 +8,8 @@ import queue
 import time
 import _thread
 import shutil
+import configparser
+import ast
 from seeker import Seeker
 from dispatcher import Dispatcher
 from hasher import Hasher
@@ -18,34 +20,38 @@ from avcheck import Avcheck
 from memer import Memer
 from elasticer import Elasticer
 
+
 # TODO
 # Incident response identification... IRXXX or other.
 # Find a way with parameters or with a folder name
 
+config = configparser.ConfigParser()
+config.read("config.ini")
+
 # To be put in config file
 # Base directory
-BASE_DIR = "/mnt/MORC/"
+BASE_DIR = config['WORKING_DIR']['BASE_DIR']
 # Directory with the DFIR-ORCs
-IN_DIR = BASE_DIR + "INPUT/"
+IN_DIR = BASE_DIR + config['WORKING_DIR']['IN_DIR']
 # Directory for the working process
-WORK_DIR = BASE_DIR + "WORKSPACE/"
+WORK_DIR = BASE_DIR + config['WORKING_DIR']['WORK_DIR']
 # Directory for the output result
-OUT_DIR = BASE_DIR + "OUTPUT/"
+OUT_DIR = BASE_DIR + config['WORKING_DIR']['OUT_DIR']
 
 DIRECTORIES = [BASE_DIR,IN_DIR,WORK_DIR,OUT_DIR]
 
+# DIR OUTPUT arbo
+DIR_OUT = ast.literal_eval(config['WORKING_DIR']['DIR_OUT'])
+
 # Base name for our DFIR-ORCs
 # BASE_NAME = ["ORCSYS","ORCMEM"]
-BASE_NAME = ["ORCSYS","DFIR-ORC","ORCYARA","ORCMEM"]
-
-# DIR OUTPUT arbo
-DIR_OUT = ["AV_CHECK","CSV_Splunk","TIMELINE","LOGS"]
+BASE_NAME = ast.literal_eval(config['BASE_DIR']['BASE_NAME'])
 
 # Check time in the IN_DIR (milliseconds)
-CHECK_TIME = 500
+CHECK_TIME = int(config['TIME']['CHECK_TIME'])
 
 # Block size to calculate HASH
-BLOCK_SIZE_HASH = 4096
+BLOCK_SIZE_HASH = int(config['HASHES']['BLOCK_SIZE_HASH'])
 
 if __name__ == '__main__':
 
