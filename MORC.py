@@ -37,14 +37,14 @@ WORK_DIR = BASE_DIR + config['WORKING_DIR']['WORK_DIR']
 # Directory for the output result
 OUT_DIR = BASE_DIR + config['WORKING_DIR']['OUT_DIR']
 
-DIRECTORIES = config['WORKING_DIR']['DIRECTORIES']
+DIRECTORIES[] = config['WORKING_DIR']['DIRECTORIES']
 
 # DIR OUTPUT arbo
-DIR_OUT = config['WORKING_DIR']['DIR_OUT']
+DIR_OUT[] = config['WORKING_DIR']['DIR_OUT']
 
 # Base name for our DFIR-ORCs
 # BASE_NAME = ["ORCSYS","ORCMEM"]
-BASE_NAME = config['BASE_DIR']['BASE_NAME']
+BASE_NAME[] = config['BASE_DIR']['BASE_NAME']
 
 # Check time in the IN_DIR (milliseconds)
 CHECK_TIME = int(config['TIME']['CHECK_TIME'])
