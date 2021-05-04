@@ -50,7 +50,7 @@ BASE_NAME = config['BASE_DIR']['BASE_NAME']
 CHECK_TIME = config['TIME']['CHECK_TIME']
 
 # Block size to calculate HASH
-BLOCK_SIZE_HASH = config['HASHES']['BLOCK_SIZE_HASH']
+BLOCK_SIZE_HASH = int(config['HASHES']['BLOCK_SIZE_HASH'])
 
 if __name__ == '__main__':
 
