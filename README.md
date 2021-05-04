@@ -66,8 +66,10 @@ sysctl -p
 
 After install
 
-- Change the BASE_DIR in _MORC.py_
-- Change the BASE_NAME in _MORC.py_
+- Change the BASE_DIR in _config.ini_
+- Change the BASE_NAME in _config.ini_
+
+To launch MORC
 
 ```
 python3 MORC.py
