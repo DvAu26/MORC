@@ -64,6 +64,12 @@ Update and reload our sysctl config with
 sysctl -p
 ```
 
+7. Install MORC
+
+```
+git clone https://github.com/DvAu26/MORC
+```
+
 ## Using
 
 After install
@@ -74,7 +80,7 @@ After install
 To launch MORC
 
 ```
-python3 MORC.py
+MORC$ python3 MORC.py
 ```
 
 ## How it works
