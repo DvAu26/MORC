@@ -57,14 +57,12 @@ EOF
 ```
 Need logout or reboot to take change :
 
-```
-exit
-```
+
+`exit`
 
 or
-```
-reboot
-```
+
+`reboot`
 
 6. Install MORC with its python requirements
 
