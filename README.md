@@ -92,9 +92,7 @@ vim ~/MORC/config.ini
 BASE_DIR is the root directory where MORC will work in.
 In this folder, MORC will create directories INPUT, WORKSPACE and OUTPUT (by default).
 
-```
-BASE_DIR = /case/MORC/
-```
+`BASE_DIR = /case/MORC/`
 
 - Change the __BASE_NAME__ in _config.ini_ (optional)
 
@@ -103,9 +101,7 @@ You can modify or adapt the naming of DFIR-ORC files that you have to submit to 
 
 `BASE_NAME =['ORCSYS','ORCMEM']`
 
-```
-BASE_NAME =['ORCSYS','DFIR-ORC','ORCYARA','ORCMEM']
-```
+`BASE_NAME =['ORCSYS','DFIR-ORC','ORCYARA','ORCMEM']`
 
 2. MORC initialization
 
