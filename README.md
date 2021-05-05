@@ -36,6 +36,34 @@ Install python requirements
 pip3 intall -r requirements.txt
 ```
 
+MORC work with lot of files, we can update your ulimits.
+
+```
+sudo sysctl -w fs.file-max=1000000
+```
+
+Edit /etc/sysctl.conf (with vi or vim)
+
+
+```
+sudo vim.tiny /etc/sysctl.conf
+```
+
+At the end you could had it :
+
+```
+# Ulimits max 1 000 000 files
+fs.file-max = 1000000
+```
+
+Update and reload our sysctl config with
+
+```
+sysctl -p
+```
+
+
+
 ## Using
 
 After install
