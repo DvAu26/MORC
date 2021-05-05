@@ -33,6 +33,7 @@ class Dispatcher:
         self.wk_dir = w_dir
         self.ou_dir = o_dir
         self.dir_ou = dir_o
+        self.pending = 0
         self.end = False
         print("== INIT Dispatcher ==")
 
@@ -85,7 +86,7 @@ class Dispatcher:
         # extractor send the extracting directory to be exploited
         # MD5 calculated and f.md5 generated at least
         # 1st extract done in WORK_DIR/MD5(f)
-        print("Dispatch after extract on : " + d)
+        # print("Dispatch after extract on : " + d)
         # TODO check not return an empty str
         md5p = self.md5_recup_from_p(d)
         # print(md5p)
@@ -130,7 +131,9 @@ class Dispatcher:
                                             # ------
                                             # Here to put an queue_regin.put(...) with check magic.
                                             # ------
-                                            print("=== Pending File : " + os.path.join(root,name) + " ===")
+                                            self.pending += 1
+                                            if (self.pending % 5 == 0):
+                                                print("=== Pending Files : " + str(self.pending) + " ===")
         # Check AV?
         # Create AV arch
         # Check timeline -> Mem

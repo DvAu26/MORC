@@ -37,7 +37,7 @@ class Hasher:
                 _thread.start_new_thread(self.run2,(fic_hash,))
 
     def run2 (self,f):
-        print("Hasher on : " + f)
+        print("--> Hasher on : " + f)
         md5_file = self.calc_md5(f)        
         if not self.check_md5_file(f) and not os.path.isfile(self.in_dir+f+".md5"):
             # print("No .md5 file for the file : " + f)

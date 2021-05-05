@@ -46,7 +46,7 @@ class Extractor:
         # if MD5 exist q_extrad(f)
         # if not extract in the wk_dir/MD5 folder
         if not os.path.isdir(self.wk_dir+self.md5_recup(f)+"/"):
-            print("Extracting file : " + f)
+            print("--> Extracting ORCSYS file : " + f)
             if self.extrac_file(f):
                 # print("=== Extract OK in the MD5 folder ===")
                 self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
@@ -63,7 +63,7 @@ class Extractor:
         # just extract in the same directory but whit
         # ".dir" like directory
         if not os.path.isdir(path+".dir"):
-            print("Extracting file : " + path)
+            print("--> Extracting file : " + path)
             if self.extrac_path(path):
                 # print("=== Extract OK ===")
                 self.q_extd.put(path+".dir/")

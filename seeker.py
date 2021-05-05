@@ -40,7 +40,7 @@ class Seeker:
                     fw = open(self.in_dir+f+".working","w")
                     fw.close()
                     # print("Seeker : " + f)
-            print("-- Sleeping for " + str(self.check_time) + "s --")
+            print("--> Seeker is sleeping for " + str(self.check_time) + "s --")
             time.sleep(self.check_time)
 
 

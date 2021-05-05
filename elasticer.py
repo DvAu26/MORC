@@ -36,7 +36,7 @@ class Elasticer:
 
     def run2 (self,pf):
         # Copy from WORKSPACE to OUTPUT/AVCheck
-        print("Elasticer on : " + pf)
+        print("==== Elasticer on : " + pf)
         
         md5dfir = self.get_md5(pf)
         filename = pf.split("/")[-1]
