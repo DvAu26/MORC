@@ -54,12 +54,13 @@ sudo bash -c "cat <<EOF >> /etc/pam.d/common-session
 session required pam_limits.so
 EOF
 "
-
+```
 Need logout or reboot to take change :
 
 ```
 exit
 ```
+
 or
 ```
 reboot
