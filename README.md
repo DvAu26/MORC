@@ -2,6 +2,8 @@
 
 Auto extract french DFIR ORC
 
+Tested : Ubuntu 20.04 LTS and Ubuntu 20.10
+
 ## Requirements
 
 1. Install fresh Ubuntu 20.04 x64
@@ -45,7 +47,7 @@ $ sudo bash -c "cat <<EOF >> /etc/sysctl.conf
 fs.file-max = 1000000
 EOF
 "
-
+echo
 $ sudo sysctl -p
 ```
 
