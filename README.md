@@ -2,7 +2,7 @@
 
 Auto extract french DFIR ORC
 
-Tested : Ubuntu 20.04 LTS
+_Tested_ : Ubuntu 20.04 LTS
 
 ## Requirements
 
