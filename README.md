@@ -149,9 +149,9 @@ You will perform an Hash check or at least an Hash calculate before any action.
 - MORC extract _DFIR-ORCs_ in __WORK_DIR__/__MD5__/
 - MORC create in __OUT_DIR__/__MD5__/__AV__/ an archive with all artefacts have to go to AV check
 - MORC move all _CSV_ files in __OUT_DIR__/__MD5__/__CSV__/ to go to ELK/Splunk/others SIEM.
-- MORC launch __log2timeline/psort__ over evtx at least and put the csv timeline result in __OUT_DIR__/__MD5__/__CSV__/
-- MORC launch Tzworks binaries over the artefacts.
-- MORC launch Metadata extractor over the __EXE__ files.
+- MORC will launch __log2timeline/psort__ over evtx at least and put the csv timeline result in __OUT_DIR__/__MD5__/__CSV__/
+- MORC will launch Tzworks binaries over the artefacts.
+- MORC will launch Metadata extractor over the __EXE__ files.
 
 
 ## Roadmap
