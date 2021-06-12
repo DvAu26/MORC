@@ -17,6 +17,7 @@ class Seeker:
         self.in_dir = i_dir
         self.b_name = b_name
         self.check_time = ch_time
+        self.findfile = 0
         self.end = False
         print("== INIT Seeker ==")
 
@@ -39,8 +40,9 @@ class Seeker:
                     self.q_dis.put(f)
                     fw = open(self.in_dir+f+".working","w")
                     fw.close()
+                    self.findfile += 1
                     # print("Seeker : " + f)
-            print("--> Seeker is sleeping for " + str(self.check_time) + "s --")
+            print("--> Seeker find " + str(self.findfile) + " now is sleeping for " + str(self.check_time) + "s --")
             time.sleep(self.check_time)
 
 

@@ -21,6 +21,8 @@ class Extractor:
         self.q_ext2 = q_extp
         self.in_dir = i_dir
         self.wk_dir = w_dir
+        self.pendfile = 0
+        self.infile = 0
         self.end = False
         print("== INIT Extractor ==")
 
@@ -45,8 +47,10 @@ class Extractor:
         # check if wk_dir/MD5/ exists
         # if MD5 exist q_extrad(f)
         # if not extract in the wk_dir/MD5 folder
+        self.infile += 1
+        self.pendfile += 1
         if not os.path.isdir(self.wk_dir+self.md5_recup(f)+"/"):
-            print("--> Extracting ORCSYS file : " + f)
+            print("--> Pending/Files : " + str(self.pendfile) + " / " + str(self.infile))
             if self.extrac_file(f):
                 # print("=== Extract OK in the MD5 folder ===")
                 self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
@@ -57,13 +61,16 @@ class Extractor:
             # print("=== MD5 dir exist ===")
             # print(f)
             self.q_extd.put(self.wk_dir+self.md5_recup(f)+"/")
+        self.pendfile -=1
 
     def run3 (self,path):
         # path is a path from an extracted archives
         # just extract in the same directory but whit
         # ".dir" like directory
+        self.infile += 1
+        self.pendfile += 1
         if not os.path.isdir(path+".dir"):
-            print("--> Extracting file : " + path)
+            print("--> Pending/Files : " + str(self.pendfile) + " / " + str(self.infile))
             if self.extrac_path(path):
                 # print("=== Extract OK ===")
                 self.q_extd.put(path+".dir/")
@@ -72,6 +79,7 @@ class Extractor:
         else:
             # print("=== Directory exist ===")
             self.q_extd.put(path+".dir/")
+        self.pendfile -=1
 
     def extrac_file (self,f):
         # Method to extract file f from the IN_DIR in the WORK_DIR

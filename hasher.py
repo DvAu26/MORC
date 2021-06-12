@@ -20,6 +20,8 @@ class Hasher:
         self.in_dir = i_dir
         self.wk_dir = w_dir
         self.bk_size = b_size
+        self.infile = 0
+        self.pendfile = 0
         self.end = False
         print("== INIT Hasher ==")
 
@@ -37,7 +39,10 @@ class Hasher:
                 _thread.start_new_thread(self.run2,(fic_hash,))
 
     def run2 (self,f):
-        print("--> Hasher on : " + f)
+        self.infile += 1
+        self.pendfile += 1
+        print("** Hasher worker : Pending∕Total files : " + str(self.pendfile) + " / " + str(self.infile) + " **")  
+        #print("--> Hasher on : " + f)
         md5_file = self.calc_md5(f)        
         if not self.check_md5_file(f) and not os.path.isfile(self.in_dir+f+".md5"):
             # print("No .md5 file for the file : " + f)
@@ -51,6 +56,7 @@ class Hasher:
             print("*** Error MD5 ***")
             print("There is a diff between the calculate and the .md5 file")
             os.remove(self.in_dir+f+".working")
+        self.pendfile -= 1
 
     def check_md5_file (self,f):
         # method to check if f.md5 exist with something like MD5

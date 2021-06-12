@@ -13,7 +13,7 @@ import random
 
 class Dispatcher:
 
-    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,q_mem,q_memed,q_es,i_dir,w_dir,o_dir,dir_o):
+    def __init__ (self,q_dis,q_extrac,q_extrad,q_extp,q_av,q_hsh,q_hsd,i_csv,o_csv,i_blk,q_mem,q_memed,q_json,q_jsoned,q_es,i_dir,w_dir,o_dir,dir_o):
         self.q_dis = q_dis
         self.q_extrac = q_extrac
         self.q_extrad = q_extrad
@@ -26,6 +26,8 @@ class Dispatcher:
         self.q_blk = i_blk
         self.q_mem = q_mem
         self.q_memed = q_memed
+        self.q_json = q_json
+        self.q_jsoned = q_jsoned
         self.q_es = q_es
         # self.q_splk = i_spl
         # self.q_splkd = o_spl
@@ -34,6 +36,8 @@ class Dispatcher:
         self.ou_dir = o_dir
         self.dir_ou = dir_o
         self.pending = 0
+        self.splunkpending = 0
+        self.splunkfile = 0
         self.end = False
         print("== INIT Dispatcher ==")
 
@@ -55,9 +59,13 @@ class Dispatcher:
             if self.q_extrad.qsize() > 0:
                 dir_ext = self.q_extrad.get()
                 _thread.start_new_thread(self.run4,(dir_ext,))
+            if self.q_jsoned.qsize() > 0:
+                dir_jso = self.q_jsoned.get()
+                _thread.start_new_thread(self.run7,(dir_jso,))
             if self.q_csved.qsize() > 0:
                 dir_csv = self.q_csved.get()
-                _thread.start_new_thread(self.run5,(dir_csv,))
+                _thread.start_new_thread(self.run6,(dir_csv,))
+
 
 
     def run2 (self,f):
@@ -125,15 +133,15 @@ class Dispatcher:
                                             self.q_mem.put(os.path.join(root,name))
                                     else:
                                         # EVTX to Elasticsearch
-                                        if name.find("evtx_data") >= 0:
-                                            self.q_es.put(os.path.join(root,name))
+                                        if name.find("evtx_data") > 0:
+                                            self.q_jsoned.put(os.path.join(root,name))
                                         else:
                                             # ------
                                             # Here to put an queue_regin.put(...) with check magic.
                                             # ------
                                             self.pending += 1
-                                            if (self.pending % 5 == 0):
-                                                print("=== Pending Files : " + str(self.pending) + " ===")
+                                            if (self.pending % 50 == 0):
+                                                print("--> End Files : " + str(self.pending) + " ===")
         # Check AV?
         # Create AV arch
         # Check timeline -> Mem
@@ -141,9 +149,19 @@ class Dispatcher:
 
     def run5 (self,f):
         # Csv output to go to Splunk or others
-        print("Splunk going on : " + f)
+        # self.splunkfile += 1
+        print("Splunk Pending/processes : " + str(self.splunkpending) + " / " + str(self.splunkfile))
         # self.q_splunk.put(f)
 
+    def run6 (self,f):
+        # Csv output to JSON for ELK
+        if os.path.getsize(f) > 0:
+            self.q_json.put(f)
+
+    def run7 (self,f):
+        # Load JSON to ELK
+        if os.path.getsize(f) > 0:
+            self.q_es.put(f)
 
     def md5_recup_from_f (self,f):
         # Method to not calculate but extract from the
